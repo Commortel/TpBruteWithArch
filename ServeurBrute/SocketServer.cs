@@ -32,10 +32,31 @@ namespace ServeurBrute
                 int d = rd.ReadDiscriminant();
                 switch (d)
                 {
+                    case ProtocoleImplementation.QUERY_GET_BRUTE:
+                        Console.WriteLine("QUERY_GET_BRUTE");
+                        break;
+                    case ProtocoleImplementation.QUERY_DEL_BRUTE:
+                        Console.WriteLine("QUERY_DEL_BRUTE");
+                        break;
+                    case ProtocoleImplementation.QUERY_UPDATE_BRUTE:
+                        Console.WriteLine("QUERY_GET_BRUTE");
+                        break;
                     case ProtocoleImplementation.QUERY_NEW_BRUTE:
-                        Console.WriteLine("Query_NewBrute");
+                        (new Query(this.GetWriter())).readCreateBrute(rd.ReadDiscriminant);
+                        break;
+                    case ProtocoleImplementation.QUERY_DECONNEXION:
+                        Console.WriteLine("QUERY_DECONNEXION");
+                        break;
+                    case ProtocoleImplementation.QUERY_GET_LIST_OPPONENT:
+                        Console.WriteLine("QUERY_GET_LIST_OPPONENT");
                         break;
                     case ProtocoleImplementation.QUERY_GET_OPPONENT:
+                        Console.WriteLine("QUERY_GET_OPPONENT");
+                        break;
+                    case ProtocoleImplementation.QUERY_GET_LIST_BRUTE:
+                        Console.WriteLine("QUERY_GET_LIST_BRUTE");
+                        break;
+                    default:
                         break;
                 }
             }
