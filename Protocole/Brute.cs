@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 
-namespace Serveur
+namespace Protocole
 {
     public class Brute
     {
         #region Fields
 
         private String name;
-        private int level, life, strength, agility, speed;
+        private short level, life, strength, agility, speed;
         private List<Bonus> bonusList;
         private Bitmap image;
 
@@ -25,31 +25,31 @@ namespace Serveur
             set { name = value; }
         }
 
-        public int Speed
+        public short Speed
         {
             get { return speed; }
             set { speed = value; }
         }
 
-        public int Agility
+        public short Agility
         {
             get { return agility; }
             set { agility = value; }
         }
 
-        public int Strength
+        public short Strength
         {
             get { return strength; }
             set { strength = value; }
         }
 
-        public int Life
+        public short Life
         {
             get { return life; }
             set { life = value; }
         }
-
-        public int Level
+        
+        public short Level
         {
             get { return level; }
             set { level = value; }
@@ -79,6 +79,7 @@ namespace Serveur
             this.agility = 0;
             this.speed = 0;
             this.bonusList = new List<Bonus>();
+            this.image = null;
         }
 
         public Brute(String name)
@@ -90,6 +91,18 @@ namespace Serveur
             this.agility = 0;
             this.speed = 0;
             this.bonusList = new List<Bonus>();
+        }
+
+        public Brute(String name, short level, short life, short strength, short agility, short speed/*, Bitmap image*/)
+        {
+            this.name = name;
+            this.level = level;
+            this.life = life;
+            this.strength = strength;
+            this.agility = agility;
+            this.speed = speed;
+            this.bonusList = new List<Bonus>();
+            //this.image = image;
         }
 
         #endregion Constructor

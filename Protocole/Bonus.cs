@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Serveur
+namespace Protocole
 {
-    class Bonus
+    public class Bonus
     {
         #region Fields
 
