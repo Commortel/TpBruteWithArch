@@ -59,8 +59,37 @@ namespace ClientTest
             String tmp = null;
             while (true)
             {
+                Console.Write("Commande : "); 
                 tmp = Console.ReadLine();
-                this.n.CreateNewBrute(tmp);
+                switch (tmp)
+                {
+                    case ProtocoleImplementation.GET_BRUTE:
+                        Console.WriteLine("QUERY_GET_BRUTE");
+                        break;
+                    case ProtocoleImplementation.DEL_BRUTE:
+                        Console.WriteLine("QUERY_DEL_BRUTE");
+                        break;
+                    case ProtocoleImplementation.UPDATE_BRUTE:
+                        Console.WriteLine("QUERY_GET_BRUTE");
+                        break;
+                    case ProtocoleImplementation.NEW_BRUTE:
+                        this.n.CreateNewBrute(Console.ReadLine());
+                        break;
+                    case ProtocoleImplementation.DECONNEXION:
+                        Console.WriteLine("QUERY_DECONNEXION");
+                        break;
+                    case ProtocoleImplementation.GET_LIST_OPPONENT:
+                        Console.WriteLine("QUERY_GET_LIST_OPPONENT");
+                        break;
+                    case ProtocoleImplementation.GET_OPPONENT:
+                        Console.WriteLine("QUERY_GET_OPPONENT");;
+                        break;
+                    case ProtocoleImplementation.GET_LIST_BRUTE:
+                        this.n.ListeBrute();
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 

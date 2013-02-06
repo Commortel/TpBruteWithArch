@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using Protocole;
@@ -8,9 +8,12 @@ using System.Net.Sockets;
 
 namespace ServeurBrute
 {
-    class SocketServer : SocketImplementation
+    public class SocketServer : SocketImplementation
     {
         #region Fields
+
+        public static ArrayList listBrute = new ArrayList();
+
         #endregion Fields
 
         #region Accessors
@@ -42,7 +45,7 @@ namespace ServeurBrute
                         Console.WriteLine("QUERY_GET_BRUTE");
                         break;
                     case ProtocoleImplementation.QUERY_NEW_BRUTE:
-                        (new Query(this.GetWriter())).readCreateBrute(rd.ReadDiscriminant);
+                        (new Query(this.GetWriter())).CreateBrute(rd.ReadString());
                         break;
                     case ProtocoleImplementation.QUERY_DECONNEXION:
                         Console.WriteLine("QUERY_DECONNEXION");
@@ -51,10 +54,10 @@ namespace ServeurBrute
                         Console.WriteLine("QUERY_GET_LIST_OPPONENT");
                         break;
                     case ProtocoleImplementation.QUERY_GET_OPPONENT:
-                        Console.WriteLine("QUERY_GET_OPPONENT");
+                        (new Query(this.GetWriter())).Opponent(rd.ReadString());
                         break;
                     case ProtocoleImplementation.QUERY_GET_LIST_BRUTE:
-                        Console.WriteLine("QUERY_GET_LIST_BRUTE");
+                        (new Query(this.GetWriter())).ListBrute();
                         break;
                     default:
                         break;

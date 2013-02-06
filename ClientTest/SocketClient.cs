@@ -26,13 +26,20 @@ namespace ClientTest
 
         public void CreateNewBrute(String name)
         {
+            Console.WriteLine(name);
             this.GetWriter().CreateDiscriminant(ProtocoleImplementation.QUERY_NEW_BRUTE);
+            this.GetWriter().CreateString(name);
             this.GetWriter().Send();
         }
 
-        public void ListeBrute(String name)
+        public void ListeBrute()
         {
-
+            this.GetWriter().CreateDiscriminant(ProtocoleImplementation.QUERY_GET_LIST_BRUTE);
+            this.GetWriter().Send();
+            int len = this.GetReader().ReadShortInt();
+            Console.WriteLine(len);
+            for(int i=0; i < len; i++)
+             Console.WriteLine(this.GetReader().ReadString());
         }
 
         #endregion Methods

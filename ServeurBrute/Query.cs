@@ -34,8 +34,9 @@ namespace ServeurBrute
 
         #region Methods
 
-         public void readCreateBrute(String name) 
-         {    
+         public void CreateBrute(String name) 
+         {
+            Console.WriteLine("NewBrute");
             short level = 1;
             short strength = 10;
             short agility = 10;
@@ -43,9 +44,35 @@ namespace ServeurBrute
             short life = 10;
 
             Brute brute = new Brute(name, level, life, strength, agility, speed/*, image*/);
+            SocketServer.listBrute.Add(brute);
             this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_OK);
             this.GetWriter.Send();
         }
+
+         public void ListBrute()
+         {
+             Console.WriteLine("ListBrute");
+             this.GetWriter.CreateShortInt((short)SocketServer.listBrute.Count);
+             if (SocketServer.listBrute.Count != 0)
+             {
+                 Console.WriteLine("ListBrute pleine" + (short)SocketServer.listBrute.Count);
+                 foreach (Brute brute in SocketServer.listBrute)
+                 {
+                     this.GetWriter.CreateString(brute.getParam());
+                 }
+             }
+             else
+             {
+                 this.GetWriter.CreateString("");
+                 Console.WriteLine("ListBruteVide");
+             }
+             this.GetWriter.Send();
+         }
+
+         public void Opponent(String name)
+         {
+             throw new NotImplementedException();
+         }
 
         #endregion Methods
     }
