@@ -13,6 +13,7 @@ namespace Protocole
         #region Fields
 
         private NetworkStream ns;
+        private int offset;
 
         #endregion Fields
 
@@ -21,6 +22,7 @@ namespace Protocole
         public Reader(NetworkStream Flux)
         {
             this.ns = Flux;
+            this.offset = 0;
         }
 
         #endregion Constructors
@@ -29,9 +31,17 @@ namespace Protocole
 
         public byte ReadByte()
         {
-            byte[] b = new byte[1];
-            this.ns.Read(b, 0, 1);
-            return b[0];
+            try
+            {
+                byte[] b = new byte[1];
+                this.ns.Read(b, this.offset, b.Length);
+                return b[0];
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            return (byte)0;
         }
 
         public byte ReadDiscriminant()
@@ -39,13 +49,55 @@ namespace Protocole
             return this.ReadByte();
         }
 
-        /*public String ReadText()
+        public short ReadShortInt()
         {
             try
             {
-                String tmp = sr.ReadLine();
-                //int length = Convert.ToInt32(tmp.Substring(0, 2));
-                return tmp;//.Substring(2, length);
+                byte[] b = new byte[ProtocoleImplementation.SHORT_INT];
+                int numberOfBytesRead = 0;
+                while (numberOfBytesRead < b.Length)
+                {
+                    numberOfBytesRead += this.ns.Read(b, 0, b.Length);
+                }
+                return BitConverter.ToInt16(b, 0);
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            return -1;
+        }
+
+        public int ReadLongInt()
+        {
+            try
+            {
+                byte[] b = new byte[ProtocoleImplementation.LONG_INT];
+                int numberOfBytesRead = 0;
+                while (numberOfBytesRead < b.Length)
+                {
+                    numberOfBytesRead += this.ns.Read(b, 0, b.Length);
+                }
+                return BitConverter.ToInt32(b,0);
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            return -1;
+        }
+
+        public String ReadString()
+        {
+            try
+            {
+                byte[] b = new byte[this.ReadShortInt()];
+                int numberOfBytesRead = 0;
+                while (numberOfBytesRead < b.Length)
+                {
+                    numberOfBytesRead += this.ns.Read(b, 0, b.Length);
+                }
+                return System.Text.Encoding.UTF8.GetString(b);
             }
             catch (IOException e)
             {
@@ -54,32 +106,19 @@ namespace Protocole
             return null;
         }
 
-        public int ReadInt()
+        public bool ReadBoolean()
         {
             try
             {
-                return Convert.ToInt32(sr.ReadLine());
+                byte b = this.ReadByte();
+                return b != 0x00;
             }
             catch (IOException e)
             {
                 Console.WriteLine(e.ToString());
             }
-            return 0;
+            return false;
         }
-
-        public String[] ReadTabString()
-        {
-            try
-            {
-                String tmp = sr.ReadLine();
-                return tmp.Split(delimeterChars);
-            }
-            catch (IOException e)
-            {
-                Console.WriteLine(e.ToString());
-            }
-            return null;
-        }*/
 
         public void Close()
         {

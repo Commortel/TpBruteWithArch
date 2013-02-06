@@ -13,6 +13,7 @@ namespace Protocole
         #region Fields
 
         private NetworkStream ns;
+        private int offset;
 
         #endregion Fields
 
@@ -21,6 +22,7 @@ namespace Protocole
         public Writer(NetworkStream Flux)
         {
             this.ns = Flux;
+            this.offset = 0;
         }
 
         #endregion Constructors
@@ -32,59 +34,64 @@ namespace Protocole
             this.CreateByte(disc);
         }
 
-        public void CreateByte(byte value)
+        public void CreateByte(byte val)
         {
-            this.ns.WriteByte(value);
+            try { this.ns.WriteByte(val); }
+            catch (IOException E) { throw new IOException(E.Message); }
         }
 
-        /*public void CreateText(String txt)
+        public void CreateShortInt(short val)
+        {
+            try 
+            { 
+                byte[] Tbyte = BitConverter.GetBytes(val);
+                this.ns.Write(Tbyte, 0,ProtocoleImplementation.SHORT_INT);
+            }
+            catch (IOException E) { throw new IOException(E.Message); }
+        }
+
+        public void CreateLongInt(int val)
         {
             try
             {
-                byte StrByte = Convert.ToByte(txt);
-
-                this.ns.Write(
+                byte[] Tbyte = BitConverter.GetBytes(val);
+                this.ns.Write(Tbyte, 0, ProtocoleImplementation.LONG_INT);
             }
-            catch (IOException e)
-            {
-                Console.WriteLine(e.ToString());
-            }
+            catch (IOException E) { throw new IOException(E.Message); }
         }
 
-        public void CreateInt(int i)
+        public void CreateString(String txt)
         {
             try
             {
-                ns.WriteLine(i);
+                this.CreateShortInt((short)txt.Length);
+                byte[] Tbyte = System.Text.Encoding.UTF8.GetBytes(txt);
+                this.ns.Write(Tbyte, 0, ProtocoleImplementation.CHAR*txt.Length);
             }
-            catch (IOException e)
+            catch (IOException E) { throw new IOException(E.Message); }
+        }
+
+        public void CreateBoolean(bool val)
+        {
+            try 
             {
-                Console.WriteLine(e.ToString());
+                byte b = (byte)(val?0xFF:0x00);
+                this.CreateByte(b);
             }
-        }*/
+            catch (IOException E) { throw new IOException(E.Message); }
+        }
 
         public void Send()
         {
-            try
-            {
-                ns.Flush();
-            }
-            catch (IOException e)
-            {
-                Console.WriteLine(e.ToString());
-            }
+            try { ns.Flush(); }
+            catch (IOException e) { Console.WriteLine(e.ToString()); }
         }
 
         public void Close()
         {
-            try
-            {
-                ns.Close();
-            }
-            catch (IOException e)
-            {
-                Console.WriteLine(e.ToString());
-            }
+            try { ns.Close(); }
+            catch (IOException e) { Console.WriteLine(e.ToString()); }
+            this.offset = 0;
         }
 
         #endregion Methods
