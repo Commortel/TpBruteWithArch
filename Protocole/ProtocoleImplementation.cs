@@ -14,7 +14,7 @@ namespace Protocole
         //Type
         public const int BYTE = 1;
         public const int BOOL = 1;
-        public const int CHAR = 2;
+        public const int CHAR = 1;
         public const int SHORT_INT = 2;
         public const int LONG_INT = 4;
         public const int FLOAT = 8;
@@ -35,5 +35,15 @@ namespace Protocole
         public const byte ANSWER_TEXT = (byte)0x0012;
         public const byte ANSWER_DOWNLOAD_BRUTE = (byte)0x0013;
         public const byte ANSWER_DOWNLOAD_BRUTE_IMG = (byte)0x0014;
+
+        // CommandeClient
+        public const String GET_BRUTE = "GetBrute";
+        public const String DEL_BRUTE = "DelBrute";
+        public const String UPDATE_BRUTE = "UpdateBrute";
+        public const String NEW_BRUTE = "NewBrute";
+        public const String DECONNEXION = "Exit";
+        public const String GET_LIST_OPPONENT = "ListOpponent";
+        public const String GET_OPPONENT = "GetOpponent";
+        public const String GET_LIST_BRUTE = "ListBrute";
     }
 }
