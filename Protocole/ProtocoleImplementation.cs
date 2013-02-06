@@ -11,21 +11,29 @@ namespace Protocole
 
         public static Object EXIT_TEXT = "exit";
 
+        //Type
+        public const int BYTE = 1;
+        public const int BOOL = 1;
+        public const int CHAR = 2;
+        public const int SHORT_INT = 2;
+        public const int LONG_INT = 4;
+        public const int FLOAT = 8;
+
         // Query
-        static public int QUERY_GET_BRUTE = 0x0001;
-        static public int QUERY_DEL_BRUTE = 0x0002;
-        static public int QUERY_UPDATE_BRUTE = 0x0003;
+        public const byte QUERY_GET_BRUTE = (byte)0x0001;
+        public const byte QUERY_DEL_BRUTE = (byte)0x0002;
+        public const byte QUERY_UPDATE_BRUTE = (byte)0x0003;
         public const byte QUERY_NEW_BRUTE = (byte)0x0004;
-        static public int QUERY_DECONNEXION = 0x0005;
-        static public int QUERY_GET_LIST_OPPONENT = 0x0006;
-        public const int QUERY_GET_OPPONENT = 0x0007;
-        static public int QUERY_GET_LIST_BRUTE = 0x0008;
+        public const byte QUERY_DECONNEXION = (byte)0x0005;
+        public const byte QUERY_GET_LIST_OPPONENT = (byte)0x0006;
+        public const byte QUERY_GET_OPPONENT = (byte)0x0007;
+        public const byte QUERY_GET_LIST_BRUTE = (byte)0x0008;
 
         // Answer
-        static public int ANSWER_OK = 0x0010;
-        static public int ANSWER_KO = 0x0011;
-        static public int ANSWER_TEXT = 0x0012;
-        static public int ANSWER_DOWNLOAD_BRUTE = 0x0013;
-        static public int ANSWER_DOWNLOAD_BRUTE_IMG = 0x0014;
+        public const byte ANSWER_OK = (byte)0x0010;
+        public const byte ANSWER_KO = (byte)0x0011;
+        public const byte ANSWER_TEXT = (byte)0x0012;
+        public const byte ANSWER_DOWNLOAD_BRUTE = (byte)0x0013;
+        public const byte ANSWER_DOWNLOAD_BRUTE_IMG = (byte)0x0014;
     }
 }
