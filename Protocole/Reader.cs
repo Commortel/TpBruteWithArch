@@ -120,6 +120,23 @@ namespace Protocole
             return false;
         }
 
+        public String ReadImage(String uri)
+        {
+            int imgSize = this.ReadLongInt();
+            byte[] b = new byte[imgSize];
+            int read = 0;
+            while(read < imgSize){
+                read += this.ns.Read(b, read, imgSize - read);
+            }
+
+            using (FileStream fs = new FileStream(@uri, FileMode.Create))
+            {
+                fs.Write(b, 0, b.Length);
+            }
+            return uri;
+        }
+
+
         public void Close()
         {
             try

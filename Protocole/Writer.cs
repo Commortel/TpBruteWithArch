@@ -81,6 +81,23 @@ namespace Protocole
             catch (IOException E) { throw new IOException(E.Message); }
         }
 
+        public void CreateImage(String uri)
+        {
+            FileStream fileStream = new FileStream(@uri, FileMode.Open, FileAccess.Read);
+            try 
+            {
+                int length = (int)fileStream.Length;
+                this.CreateLongInt(length);
+                byte[] buffer = new byte[length];
+                int sum = 0, count = 0;
+
+                while ((count = fileStream.Read(buffer, sum, length - sum)) > 0)
+                    sum += count;
+                this.ns.Write(buffer, 0, buffer.Length);
+            } 
+            catch (IOException e) { Console.WriteLine(e.ToString()); }
+        }
+
         public void Send()
         {
             try { ns.Flush(); }
