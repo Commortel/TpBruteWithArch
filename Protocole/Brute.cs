@@ -111,16 +111,17 @@ namespace Protocole
 
         public void randomValue()
         {
+            Random n = new Random();
             this.level = 1;
-            this.life = 10;
-            this.strength = 10;
-            this.agility = 10;
-            this.speed = 10;
+            this.life = (short)n.Next(20,30);
+            this.strength = (short)n.Next(2, 4);
+            this.agility = (short)n.Next(2, 4);
+            this.speed = (short)n.Next(2, 4);
         }
 
         public String getParam()
         {
-            return ":" + this.name + ":" + this.level + ":" + this.life + ":" + this.strength + ":" + this.agility + ":" + this.speed;
+            return this.name + ":" + this.level + ":" + this.life + ":" + this.strength + ":" + this.agility + ":" + this.speed;
         }
 
         public override String ToString()
