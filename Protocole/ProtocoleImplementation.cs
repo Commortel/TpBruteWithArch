@@ -42,7 +42,7 @@ namespace Protocole
         // CommandeClient
         public const String GET_BRUTE = "GetBrute";
         public const String DEL_BRUTE = "DelBrute";
-        public const String UPDATE_BRUTE = "UpdateBrute";
+        public const String UPDATE_BRUTE = "Update";
         public const String NEW_BRUTE = "NewBrute";
         public const String DECONNEXION = "Exit";
         public const String LOGIN = "Login";

@@ -132,6 +132,16 @@ namespace Protocole
                 + this.agility + "\n Speed : " + this.speed + "\n ImageNb : "+ this.image;
         }
 
+        public void Update()
+        {
+            this.level++;
+            this.life +=5;
+            this.strength++;
+            this.agility++;
+            this.speed++;
+        }
+
         #endregion Methods
+
     }
 }

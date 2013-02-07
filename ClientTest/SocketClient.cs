@@ -49,7 +49,6 @@ namespace ClientTest
                 Console.WriteLine(this.GetReader().ReadImage("MyBruteImg.jpg"));
                 Console.WriteLine(Client.myBrute.ToString());
             }
-
             Console.WriteLine("FinGetBrute");
         }
 
@@ -59,10 +58,14 @@ namespace ClientTest
             this.GetWriter().Send();
         }
 
-        public void UpdateBrute()
+        public void UpdateBrute(String name, bool result)
         {
+            Console.WriteLine("Début UpdateBrute");
             this.GetWriter().CreateDiscriminant(ProtocoleImplementation.QUERY_UPDATE_BRUTE);
+            this.GetWriter().CreateString(name);
+            this.GetWriter().CreateBoolean(result);
             this.GetWriter().Send();
+            Console.WriteLine("Fin UpdateBrute");
         }
 
         public void CreateNewBrute(String name)

@@ -72,7 +72,7 @@ namespace ClientTest
                         this.client.DelBrute();
                         break;
                     case ProtocoleImplementation.UPDATE_BRUTE:
-                        this.client.UpdateBrute();
+                        this.client.UpdateBrute(Console.ReadLine(),Convert.ToBoolean(Console.ReadLine()));
                         break;
                     case ProtocoleImplementation.NEW_BRUTE:
                         this.client.CreateNewBrute(Console.ReadLine());

@@ -57,6 +57,9 @@ namespace ServeurBrute
 
          public void UpdateBrute(String name, bool result)
          {
+             Console.WriteLine("Début Update Brute");
+             if(result)SocketServer.listBrute[name].Update();
+             Console.WriteLine("Fin Update Brute");
          }
 
          public void NewBrute(String name)
