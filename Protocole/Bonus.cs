@@ -11,6 +11,7 @@ namespace Protocole
 
         private String name;
         private int life, strength, agility, speed;
+        int image;
 
         #endregion Fields
 
@@ -40,6 +41,12 @@ namespace Protocole
             set { life = value; }
         }
 
+        public int Image
+        {
+            get { return image; }
+            set { image = value; }
+        }
+
         #endregion Accessors
 
         #region Constructors
@@ -53,13 +60,14 @@ namespace Protocole
             this.speed = 0;
         }
 
-        public Bonus(String name, int life, int strength, int agility, int speed)
+        public Bonus(String name, int life, int strength, int agility, int speed, int image)
         {
             this.name = name;
             this.life = life;
             this.strength = strength;
             this.agility = agility;
             this.speed = speed;
+            this.image = image;
         }
 
         #endregion Constructors

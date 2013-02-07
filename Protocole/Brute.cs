@@ -13,7 +13,7 @@ namespace Protocole
         private String name;
         private short level, life, strength, agility, speed;
         private List<Bonus> bonusList;
-        private Bitmap image;
+        private int image;
 
         #endregion Fields
 
@@ -60,7 +60,7 @@ namespace Protocole
             get { return bonusList; }
         }
 
-        public Bitmap Image
+        public int Image
         {
             get { return image; }
             set { image = value; }
@@ -79,7 +79,7 @@ namespace Protocole
             this.agility = 0;
             this.speed = 0;
             this.bonusList = new List<Bonus>();
-            this.image = null;
+            this.image = 0;
         }
 
         public Brute(String name)
@@ -91,9 +91,10 @@ namespace Protocole
             this.agility = 0;
             this.speed = 0;
             this.bonusList = new List<Bonus>();
+            this.image = 0;
         }
 
-        public Brute(String name, short level, short life, short strength, short agility, short speed/*, Bitmap image*/)
+        public Brute(String name, short level, short life, short strength, short agility, short speed, int image)
         {
             this.name = name;
             this.level = level;
@@ -102,7 +103,7 @@ namespace Protocole
             this.agility = agility;
             this.speed = speed;
             this.bonusList = new List<Bonus>();
-            //this.image = image;
+            this.image = image;
         }
 
         #endregion Constructor
@@ -117,16 +118,18 @@ namespace Protocole
             this.strength = (short)n.Next(2, 4);
             this.agility = (short)n.Next(2, 4);
             this.speed = (short)n.Next(2, 4);
+            this.image = n.Next(1,13);
         }
 
         public String getParam()
         {
-            return this.name + ":" + this.level + ":" + this.life + ":" + this.strength + ":" + this.agility + ":" + this.speed;
+            return this.name + ":" + this.level + ":" + this.life + ":" + this.strength + ":" + this.agility + ":" + this.speed + ":" + this.image;
         }
 
         public override String ToString()
         {
-            return "Name : " + this.name + "\nLevel : " + this.level + "\nLife : " + this.life + "\nStrength : " + this.strength + "\nAgility : " + this.agility + "\n Speed : " + this.speed;
+            return "Name : " + this.name + "\nLevel : " + this.level + "\nLife : " + this.life + "\nStrength : " + this.strength + "\nAgility : " 
+                + this.agility + "\n Speed : " + this.speed + "\n ImageNb : "+ this.image;
         }
 
         #endregion Methods
