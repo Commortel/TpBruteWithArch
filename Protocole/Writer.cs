@@ -13,7 +13,6 @@ namespace Protocole
         #region Fields
 
         private NetworkStream ns;
-        private int offset;
 
         #endregion Fields
 
@@ -22,7 +21,6 @@ namespace Protocole
         public Writer(NetworkStream Flux)
         {
             this.ns = Flux;
-            this.offset = 0;
         }
 
         #endregion Constructors
@@ -108,7 +106,6 @@ namespace Protocole
         {
             try { ns.Close(); }
             catch (IOException e) { Console.WriteLine(e.ToString()); }
-            this.offset = 0;
         }
 
         #endregion Methods

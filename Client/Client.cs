@@ -15,10 +15,8 @@ namespace ClientTest
         private IPAddress ip;
         private IPEndPoint ipEnd;
         private Socket ClientSocket;
-        private SocketClient client;
+        private SocketClient n;
         private Thread GetRead;
-        public static Brute myBrute = new Brute();
-        public static Brute otherBrute = new Brute();
         
         #endregion Fields
 
@@ -46,7 +44,7 @@ namespace ClientTest
                 ClientSocket.Connect(ipEnd);
                 if (ClientSocket.Connected)
                 {
-                    this.client = new SocketClient(ClientSocket);
+                    this.n = new SocketClient(ClientSocket);
                     GetRead.Start();
                 }
             }
@@ -66,34 +64,34 @@ namespace ClientTest
                 switch (tmp)
                 {
                     case ProtocoleImplementation.GET_BRUTE:
-                        this.client.GetBrute(Console.ReadLine());
+                        this.n.GetBrute();
                         break;
                     case ProtocoleImplementation.DEL_BRUTE:
-                        this.client.DelBrute();
+                        this.n.DelBrute();
                         break;
                     case ProtocoleImplementation.UPDATE_BRUTE:
-                        this.client.UpdateBrute();
+                        this.n.UpdateBrute();
                         break;
                     case ProtocoleImplementation.NEW_BRUTE:
-                        this.client.CreateNewBrute(Console.ReadLine());
+                        this.n.CreateNewBrute(Console.ReadLine());
                         break;
                     case ProtocoleImplementation.DECONNEXION:
-                        this.client.Deconnection();
+                        this.n.Deconnection();
                         break;
                     case ProtocoleImplementation.LOGIN:
-                        this.client.Login();
+                        this.n.Login();
                         break;
                     case ProtocoleImplementation.GET_LIST_OPPONENT:
-                        this.client.ListOpponent();
+                        this.n.ListOpponent();
                         break;
                     case ProtocoleImplementation.GET_OPPONENT:
-                        this.client.GetOpponent();
+                        this.n.GetOpponent();
                         break;
                     case ProtocoleImplementation.GET_LIST_BRUTE:
-                        this.client.ListeBrute();
+                        this.n.ListeBrute();
                         break;
                     case ProtocoleImplementation.POPULATE:
-                        this.client.Populate();
+                        this.n.Populate();
                         break;
                     default:
                         break;

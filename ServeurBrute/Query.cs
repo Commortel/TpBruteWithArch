@@ -36,6 +36,19 @@ namespace ServeurBrute
 
          public void GetBrute(String name)
          {
+             Console.WriteLine("GetBrute");
+             if (SocketServer.listBrute.ContainsKey(name))
+             {
+                 this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_DOWNLOAD_BRUTE);
+                 this.GetWriter.CreateString(SocketServer.listBrute[name].getParam());
+                 this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_DOWNLOAD_BRUTE_IMG);
+                 this.GetWriter.CreateImage("Perso-"+SocketServer.listBrute[name].Image+".jpg");
+             }
+             else
+                 this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_KO);
+             
+             this.GetWriter.Send();
+             Console.WriteLine("FinGetBrute");
          }
 
          public void DelBrute(String name)
@@ -49,14 +62,9 @@ namespace ServeurBrute
          public void NewBrute(String name)
          {
              Console.WriteLine("NewBrute");
-             short level = 1;
-             short strength = 10;
-             short agility = 10;
-             short speed = 10;
-             short life = 10;
-
-             Brute brute = new Brute(name, level, life, strength, agility, speed/*, image*/);
-             SocketServer.listBrute.Add(brute);
+             Brute brute = new Brute(name);
+             brute.randomValue();
+             SocketServer.listBrute.Add(name,brute);
              this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_OK);
              this.GetWriter.Send();
              Console.WriteLine("NewBrute" + SocketServer.listBrute.Count);
@@ -75,8 +83,17 @@ namespace ServeurBrute
          {
          }
 
-         public void GetOpponent(String name)
+         public void GetOpponent()
          {
+             Console.WriteLine("GetOpponent");
+             Brute tmp = SocketServer.listBrute.ElementAt(new Random().Next(0,SocketServer.listBrute.Count)).Value;
+             this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_DOWNLOAD_BRUTE);
+             this.GetWriter.CreateString(tmp.getParam());
+             this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_DOWNLOAD_BRUTE_IMG);
+             this.GetWriter.CreateImage("Perso-" + tmp.Image + ".jpg");
+
+             this.GetWriter.Send();
+             Console.WriteLine("FinGetOpponent");
          }
 
          public void ListeBrute()
@@ -86,10 +103,10 @@ namespace ServeurBrute
              if (SocketServer.listBrute.Count != 0)
              {
                  Console.WriteLine("ListBrute pleine" + SocketServer.listBrute.Count);
-                 foreach (Brute brute in SocketServer.listBrute)
+                 foreach (var brute in SocketServer.listBrute)
                  {
-                     Console.WriteLine(brute.getParam());
-                     this.GetWriter.CreateString(brute.getParam());
+                     Console.WriteLine(brute.Value.getParam());
+                     this.GetWriter.CreateString(brute.Value.getParam());
                  }
              }
              else

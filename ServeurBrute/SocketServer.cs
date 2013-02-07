@@ -5,6 +5,7 @@ using System.Text;
 using Protocole;
 using System.Net;
 using System.Net.Sockets;
+using System.Collections.Generic;
 
 namespace ServeurBrute
 {
@@ -12,7 +13,7 @@ namespace ServeurBrute
     {
         #region Fields
 
-        public static ArrayList listBrute = new ArrayList();
+        public static Dictionary<String, Brute> listBrute = new Dictionary<String, Brute>();
         public static ArrayList listUser = new ArrayList();
 
         #endregion Fields
@@ -58,7 +59,7 @@ namespace ServeurBrute
                         (new Query(this.GetWriter())).ListOpponent();
                         break;
                     case ProtocoleImplementation.QUERY_GET_OPPONENT:
-                        (new Query(this.GetWriter())).GetOpponent(rd.ReadString());
+                        (new Query(this.GetWriter())).GetOpponent();
                         break;
                     case ProtocoleImplementation.QUERY_GET_LIST_BRUTE:
                         (new Query(this.GetWriter())).ListeBrute();

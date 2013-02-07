@@ -13,7 +13,7 @@ namespace Protocole
         #region Fields
 
         private NetworkStream ns;
-        private int offset;
+        private char[] delimeterChars = { ':' };
 
         #endregion Fields
 
@@ -22,7 +22,6 @@ namespace Protocole
         public Reader(NetworkStream Flux)
         {
             this.ns = Flux;
-            this.offset = 0;
         }
 
         #endregion Constructors
@@ -34,7 +33,7 @@ namespace Protocole
             try
             {
                 byte[] b = new byte[1];
-                this.ns.Read(b, this.offset, b.Length);
+                this.ns.Read(b, 0, b.Length);
                 return b[0];
             }
             catch (IOException e)
@@ -98,6 +97,25 @@ namespace Protocole
                     numberOfBytesRead += this.ns.Read(b, 0, b.Length);
                 }
                 return System.Text.Encoding.UTF8.GetString(b);
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            return null;
+        }
+
+        public String[] ReadStringParam()
+        {
+            try
+            {
+                byte[] b = new byte[this.ReadShortInt()];
+                int numberOfBytesRead = 0;
+                while (numberOfBytesRead < b.Length)
+                {
+                    numberOfBytesRead += this.ns.Read(b, 0, b.Length);
+                }
+                return System.Text.Encoding.UTF8.GetString(b).Split(delimeterChars);
             }
             catch (IOException e)
             {

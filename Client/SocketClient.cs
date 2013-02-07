@@ -27,30 +27,10 @@ namespace ClientTest
 
         #region Methods
 
-        public void GetBrute(String name)
+        public void GetBrute()
         {
-            Console.WriteLine("GetBrute");
             this.GetWriter().CreateDiscriminant(ProtocoleImplementation.QUERY_GET_BRUTE);
-            this.GetWriter().CreateString(name);
             this.GetWriter().Send();
-            if (this.GetReader().ReadDiscriminant() == ProtocoleImplementation.ANSWER_KO)
-                Console.WriteLine("Error Download Brute");
-            else
-            {
-                String[] tmp = this.GetReader().ReadStringParam();
-                Client.myBrute.Name = tmp[0];
-                Client.myBrute.Level = Convert.ToInt16(tmp[1]);
-                Client.myBrute.Life = Convert.ToInt16(tmp[2]);
-                Client.myBrute.Strength = Convert.ToInt16(tmp[3]);
-                Client.myBrute.Agility = Convert.ToInt16(tmp[4]);
-                Client.myBrute.Speed = Convert.ToInt16(tmp[5]);
-                Client.myBrute.Image = Convert.ToInt32(tmp[6]);
-                this.GetReader().ReadDiscriminant();
-                Console.WriteLine(this.GetReader().ReadImage("MyBruteImg.jpg"));
-                Console.WriteLine(Client.myBrute.ToString());
-            }
-
-            Console.WriteLine("FinGetBrute");
         }
 
         public void DelBrute()
@@ -97,27 +77,8 @@ namespace ClientTest
 
         public void GetOpponent()
         {
-            Console.WriteLine("GetBrute");
             this.GetWriter().CreateDiscriminant(ProtocoleImplementation.QUERY_GET_OPPONENT);
             this.GetWriter().Send();
-            if (this.GetReader().ReadDiscriminant() == ProtocoleImplementation.ANSWER_KO)
-                Console.WriteLine("Error Download Brute");
-            else
-            {
-                String[] tmp = this.GetReader().ReadStringParam();
-                Client.otherBrute.Name = tmp[0];
-                Client.otherBrute.Level = Convert.ToInt16(tmp[1]);
-                Client.otherBrute.Life = Convert.ToInt16(tmp[2]);
-                Client.otherBrute.Strength = Convert.ToInt16(tmp[3]);
-                Client.otherBrute.Agility = Convert.ToInt16(tmp[4]);
-                Client.otherBrute.Speed = Convert.ToInt16(tmp[5]);
-                Client.otherBrute.Image = Convert.ToInt32(tmp[6]);
-                this.GetReader().ReadDiscriminant();
-                Console.WriteLine(this.GetReader().ReadImage("OtherBruteImg.jpg"));
-                Console.WriteLine(Client.otherBrute.ToString());
-            }
-
-            Console.WriteLine("FinGetBrute");
         }
 
         public void ListeBrute()
