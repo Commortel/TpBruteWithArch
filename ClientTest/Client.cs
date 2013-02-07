@@ -64,28 +64,34 @@ namespace ClientTest
                 switch (tmp)
                 {
                     case ProtocoleImplementation.GET_BRUTE:
-                        Console.WriteLine("QUERY_GET_BRUTE");
+                        this.n.GetBrute();
                         break;
                     case ProtocoleImplementation.DEL_BRUTE:
-                        Console.WriteLine("QUERY_DEL_BRUTE");
+                        this.n.DelBrute();
                         break;
                     case ProtocoleImplementation.UPDATE_BRUTE:
-                        Console.WriteLine("QUERY_GET_BRUTE");
+                        this.n.UpdateBrute();
                         break;
                     case ProtocoleImplementation.NEW_BRUTE:
                         this.n.CreateNewBrute(Console.ReadLine());
                         break;
                     case ProtocoleImplementation.DECONNEXION:
-                        Console.WriteLine("QUERY_DECONNEXION");
+                        this.n.Deconnection();
+                        break;
+                    case ProtocoleImplementation.LOGIN:
+                        this.n.Login();
                         break;
                     case ProtocoleImplementation.GET_LIST_OPPONENT:
-                        Console.WriteLine("QUERY_GET_LIST_OPPONENT");
+                        this.n.ListOpponent();
                         break;
                     case ProtocoleImplementation.GET_OPPONENT:
-                        Console.WriteLine("QUERY_GET_OPPONENT");;
+                        this.n.GetOpponent();
                         break;
                     case ProtocoleImplementation.GET_LIST_BRUTE:
                         this.n.ListeBrute();
+                        break;
+                    case ProtocoleImplementation.POPULATE:
+                        this.n.Populate();
                         break;
                     default:
                         break;

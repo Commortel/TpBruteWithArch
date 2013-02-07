@@ -13,6 +13,7 @@ namespace ServeurBrute
         #region Fields
 
         public static ArrayList listBrute = new ArrayList();
+        public static ArrayList listUser = new ArrayList();
 
         #endregion Fields
 
@@ -29,35 +30,38 @@ namespace ServeurBrute
 
         public void GetQuery()
         {
-            while (this.GetSocket().Connected)
+            while (true)
             {
                 Reader rd = this.GetReader();
                 int d = rd.ReadDiscriminant();
                 switch (d)
                 {
                     case ProtocoleImplementation.QUERY_GET_BRUTE:
-                        Console.WriteLine("QUERY_GET_BRUTE");
+                        (new Query(this.GetWriter())).GetBrute(rd.ReadString());
                         break;
                     case ProtocoleImplementation.QUERY_DEL_BRUTE:
-                        Console.WriteLine("QUERY_DEL_BRUTE");
+                        (new Query(this.GetWriter())).DelBrute(rd.ReadString());
                         break;
                     case ProtocoleImplementation.QUERY_UPDATE_BRUTE:
-                        Console.WriteLine("QUERY_GET_BRUTE");
+                        (new Query(this.GetWriter())).UpdateBrute(rd.ReadString(),rd.ReadBoolean());
                         break;
                     case ProtocoleImplementation.QUERY_NEW_BRUTE:
-                        (new Query(this.GetWriter())).CreateBrute(rd.ReadString());
+                        (new Query(this.GetWriter())).NewBrute(rd.ReadString());
                         break;
                     case ProtocoleImplementation.QUERY_DECONNEXION:
-                        Console.WriteLine("QUERY_DECONNEXION");
+                        (new Query(this.GetWriter())).Deconnection(rd.ReadString());
+                        break;
+                    case ProtocoleImplementation.QUERY_LOGIN:
+                        (new Query(this.GetWriter())).Login(rd.ReadString(), rd.ReadString());
                         break;
                     case ProtocoleImplementation.QUERY_GET_LIST_OPPONENT:
-                        Console.WriteLine("QUERY_GET_LIST_OPPONENT");
+                        (new Query(this.GetWriter())).ListOpponent();
                         break;
                     case ProtocoleImplementation.QUERY_GET_OPPONENT:
-                        (new Query(this.GetWriter())).Opponent(rd.ReadString());
+                        (new Query(this.GetWriter())).GetOpponent(rd.ReadString());
                         break;
                     case ProtocoleImplementation.QUERY_GET_LIST_BRUTE:
-                        (new Query(this.GetWriter())).ListBrute();
+                        (new Query(this.GetWriter())).ListeBrute();
                         break;
                     default:
                         break;

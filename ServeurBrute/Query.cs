@@ -34,30 +34,61 @@ namespace ServeurBrute
 
         #region Methods
 
-         public void CreateBrute(String name) 
+         public void GetBrute(String name)
          {
-            Console.WriteLine("NewBrute");
-            short level = 1;
-            short strength = 10;
-            short agility = 10;
-            short speed = 10;
-            short life = 10;
+         }
 
-            Brute brute = new Brute(name, level, life, strength, agility, speed/*, image*/);
-            SocketServer.listBrute.Add(brute);
-            this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_OK);
-            this.GetWriter.Send();
-        }
+         public void DelBrute(String name)
+         {
+         }
 
-         public void ListBrute()
+         public void UpdateBrute(String name, bool result)
+         {
+         }
+
+         public void NewBrute(String name)
+         {
+             Console.WriteLine("NewBrute");
+             short level = 1;
+             short strength = 10;
+             short agility = 10;
+             short speed = 10;
+             short life = 10;
+
+             Brute brute = new Brute(name, level, life, strength, agility, speed/*, image*/);
+             SocketServer.listBrute.Add(brute);
+             this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_OK);
+             this.GetWriter.Send();
+             Console.WriteLine("NewBrute" + SocketServer.listBrute.Count);
+         }
+
+         public void Deconnection(String name)
+         {
+         }
+
+         public void Login(String login, String password)
+         {
+
+         }
+
+         public void ListOpponent()
+         {
+         }
+
+         public void GetOpponent(String name)
+         {
+         }
+
+         public void ListeBrute()
          {
              Console.WriteLine("ListBrute");
-             this.GetWriter.CreateShortInt((short)SocketServer.listBrute.Count);
+             this.GetWriter.CreateLongInt(SocketServer.listBrute.Count);
              if (SocketServer.listBrute.Count != 0)
              {
-                 Console.WriteLine("ListBrute pleine" + (short)SocketServer.listBrute.Count);
+                 Console.WriteLine("ListBrute pleine" + SocketServer.listBrute.Count);
                  foreach (Brute brute in SocketServer.listBrute)
                  {
+                     Console.WriteLine(brute.getParam());
                      this.GetWriter.CreateString(brute.getParam());
                  }
              }
@@ -67,11 +98,7 @@ namespace ServeurBrute
                  Console.WriteLine("ListBruteVide");
              }
              this.GetWriter.Send();
-         }
-
-         public void Opponent(String name)
-         {
-             throw new NotImplementedException();
+             Console.WriteLine("FinListBrute");
          }
 
         #endregion Methods
