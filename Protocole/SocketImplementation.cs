@@ -51,7 +51,7 @@ namespace Protocole
 
         #region Methods
 
-        public void close()
+        public void Close()
         {
             try 
             {
