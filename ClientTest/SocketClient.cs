@@ -52,10 +52,15 @@ namespace ClientTest
             Console.WriteLine("FinGetBrute");
         }
 
-        public void DelBrute()
+        public void DelBrute(String name)
         {
             this.GetWriter().CreateDiscriminant(ProtocoleImplementation.QUERY_DEL_BRUTE);
+            this.GetWriter().CreateString(name);
             this.GetWriter().Send();
+            if (this.GetReader().ReadDiscriminant() == ProtocoleImplementation.ANSWER_OK)
+                Console.WriteLine("DelBrute done");
+            else
+                Console.WriteLine("Fail DelBrute");
         }
 
         public void UpdateBrute(String name, bool result)
@@ -84,12 +89,26 @@ namespace ClientTest
         {
             this.GetWriter().CreateDiscriminant(ProtocoleImplementation.QUERY_DECONNEXION);
             this.GetWriter().Send();
+            if (this.GetReader().ReadDiscriminant() == ProtocoleImplementation.ANSWER_OK)
+            {
+                Console.WriteLine("Deconnection");
+                this.GetSocket().Close();
+                this.Close();
+            }
+            else
+                Console.WriteLine("Fail");
         }
 
-        public void Login()
+        public void Login(String login, String password)
         {
             this.GetWriter().CreateDiscriminant(ProtocoleImplementation.QUERY_LOGIN);
+            this.GetWriter().CreateString(login);
+            this.GetWriter().CreateString(password);
             this.GetWriter().Send();
+            if(this.GetReader().ReadDiscriminant() == ProtocoleImplementation.ANSWER_OK)
+                Console.WriteLine("Connecté");
+            else
+                Console.WriteLine("Fail Connection");
         }
 
         public void ListOpponent()

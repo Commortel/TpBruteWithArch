@@ -19,6 +19,7 @@ namespace ClientTest
         private Thread GetRead;
         public static Brute myBrute = new Brute();
         public static Brute otherBrute = new Brute();
+        private bool IsConnected = true;
         
         #endregion Fields
 
@@ -59,7 +60,7 @@ namespace ClientTest
         public void SendQuery()
         {
             String tmp = null;
-            while (true)
+            while (this.IsConnected)
             {
                 Console.Write("Commande : "); 
                 tmp = Console.ReadLine();
@@ -69,7 +70,7 @@ namespace ClientTest
                         this.client.GetBrute(Console.ReadLine());
                         break;
                     case ProtocoleImplementation.DEL_BRUTE:
-                        this.client.DelBrute();
+                        this.client.DelBrute(Console.ReadLine());
                         break;
                     case ProtocoleImplementation.UPDATE_BRUTE:
                         this.client.UpdateBrute(Console.ReadLine(),Convert.ToBoolean(Console.ReadLine()));
@@ -81,7 +82,7 @@ namespace ClientTest
                         this.client.Deconnection();
                         break;
                     case ProtocoleImplementation.LOGIN:
-                        this.client.Login();
+                        this.client.Login(Console.ReadLine(), Console.ReadLine());
                         break;
                     case ProtocoleImplementation.GET_LIST_OPPONENT:
                         this.client.ListOpponent();

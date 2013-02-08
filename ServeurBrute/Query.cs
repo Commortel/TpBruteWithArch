@@ -53,6 +53,13 @@ namespace ServeurBrute
 
          public void DelBrute(String name)
          {
+             Console.WriteLine("DelBrute");
+             if(SocketServer.listBrute.Remove(name))
+                this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_OK);
+             else
+                 this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_KO);
+             this.GetWriter.Send();
+             Console.WriteLine("DelBrute" + SocketServer.listBrute.Count);
          }
 
          public void UpdateBrute(String name, bool result)
@@ -73,13 +80,27 @@ namespace ServeurBrute
              Console.WriteLine("NewBrute" + SocketServer.listBrute.Count);
          }
 
-         public void Deconnection(String name)
+         public void Deconnection()
          {
+             Console.WriteLine("Deconnection");
+             this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_OK);
+             this.GetWriter.Send();
          }
 
          public void Login(String login, String password)
          {
-
+             try
+             {
+                 if (SocketServer.listUser[login] == password)
+                     this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_OK);
+                 else
+                     this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_KO);
+             }
+             catch (KeyNotFoundException)
+             {
+                 this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_KO);
+             }
+             this.GetWriter.Send();
          }
 
          public void ListOpponent()

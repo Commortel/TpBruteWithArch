@@ -14,7 +14,7 @@ namespace ServeurBrute
         #region Fields
 
         public static Dictionary<String, Brute> listBrute = new Dictionary<String, Brute>();
-        public static ArrayList listUser = new ArrayList();
+        public static Dictionary<String, String> listUser = new Dictionary<String, String>();
 
         #endregion Fields
 
@@ -31,6 +31,7 @@ namespace ServeurBrute
 
         public void GetQuery()
         {
+            this.InitializeUser();
             while (true)
             {
                 Reader rd = this.GetReader();
@@ -50,7 +51,7 @@ namespace ServeurBrute
                         (new Query(this.GetWriter())).NewBrute(rd.ReadString());
                         break;
                     case ProtocoleImplementation.QUERY_DECONNEXION:
-                        (new Query(this.GetWriter())).Deconnection(rd.ReadString());
+                        (new Query(this.GetWriter())).Deconnection();
                         break;
                     case ProtocoleImplementation.QUERY_LOGIN:
                         (new Query(this.GetWriter())).Login(rd.ReadString(), rd.ReadString());
@@ -68,6 +69,11 @@ namespace ServeurBrute
                         break;
                 }
             }
+        }
+
+        private void InitializeUser()
+        {
+            SocketServer.listUser.Add("admin", "admin");
         }
 
         #endregion Methods
