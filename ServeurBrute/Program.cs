@@ -10,10 +10,8 @@ namespace ServeurBrute
     {
         static void Main(string[] args)
         {
-            //Serveur s = new Serveur();
-            //s.Start();
-            Brute b = new Brute("Pouet");
-            DataManager.InsertNewUser(b);
+            Serveur s = new Serveur();
+            s.Start();
         }
     }
 }

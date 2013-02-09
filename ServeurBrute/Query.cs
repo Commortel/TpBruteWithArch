@@ -82,6 +82,7 @@ namespace ServeurBrute
 
          public void Deconnection()
          {
+             DataManager.Save(SocketServer.listBrute);
              Console.WriteLine("Deconnection");
              this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_OK);
              this.GetWriter.Send();
