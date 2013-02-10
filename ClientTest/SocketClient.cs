@@ -5,14 +5,13 @@ using System.Text;
 using Protocole;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 
 namespace ClientTest
 {
     class SocketClient : SocketImplementation
     {
         #region Fields
-
-        private int len = 0;
 
         #endregion Fields
 
@@ -147,24 +146,31 @@ namespace ClientTest
             Console.WriteLine("Début Liste Brute");
             this.GetWriter().CreateDiscriminant(ProtocoleImplementation.QUERY_GET_LIST_BRUTE);
             this.GetWriter().Send();
-            this.len = this.GetReader().ReadLongInt();
+            int len = this.GetReader().ReadLongInt();
             Console.WriteLine(len);
             for (int i = 0; i < len; i++)
                 Console.WriteLine(this.GetReader().ReadString());
             Console.WriteLine("Fin Liste Brute");
-            this.len = 0;
         }
 
         public void Populate()
         {
             this.CreateNewBrute("Meyer");
+            Thread.Sleep(10);
             this.CreateNewBrute("Thibaut");
+            Thread.Sleep(10);
             this.CreateNewBrute("Chevalier");
+            Thread.Sleep(10);
             this.CreateNewBrute("Simon");
+            Thread.Sleep(10);
             this.CreateNewBrute("Lacroix");
+            Thread.Sleep(10);
             this.CreateNewBrute("Florent");
+            Thread.Sleep(10);
             this.CreateNewBrute("Daver");
+            Thread.Sleep(10);
             this.CreateNewBrute("Léonard");
+            Thread.Sleep(10);
         }
 
         #endregion Methods
