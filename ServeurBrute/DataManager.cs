@@ -6,6 +6,7 @@ using System.Xml.XPath;
 using System.Xml.Xsl;
 using Protocole;
 using System.Collections;
+using System.IO;
 
 namespace ServeurBrute
 {
@@ -46,30 +47,32 @@ namespace ServeurBrute
         public static Dictionary<String,Brute> Read()
         {
             Dictionary<String, Brute> brutes = new Dictionary<String, Brute>();
-            XmlTextReader xml = new XmlTextReader("Users.xml");
-            while (xml.Read())
+            if(File.Exists("User.xml"))
             {
-                //  Here we check the type of the node, in this case we are looking for element
-                if (xml.NodeType == XmlNodeType.Element)
+                XmlTextReader xml = new XmlTextReader("Users.xml");
+                while (xml.Read())
                 {
-                    //  If the element is "profile"
-                    if (xml.Name == "Brute")
+                    //  Here we check the type of the node, in this case we are looking for element
+                    if (xml.NodeType == XmlNodeType.Element)
                     {
-                        xml.Read();
-                        String name = xml.ReadElementString("Name");
-                        short level = Convert.ToInt16(xml.ReadElementString("Level"));
-                        short life = Convert.ToInt16(xml.ReadElementString("Life"));
-                        short strength = Convert.ToInt16(xml.ReadElementString("Strength"));
-                        short agility = Convert.ToInt16(xml.ReadElementString("Agility"));
-                        short speed = Convert.ToInt16(xml.ReadElementString("Speed"));
-                        int image = Convert.ToInt32(xml.ReadElementString("Image"));
-                        brutes.Add(name,new Brute(name, level, life, strength, agility, speed, image));
+                        //  If the element is "profile"
+                        if (xml.Name == "Brute")
+                        {
+                            xml.Read();
+                            String name = xml.ReadElementString("Name");
+                            short level = Convert.ToInt16(xml.ReadElementString("Level"));
+                            short life = Convert.ToInt16(xml.ReadElementString("Life"));
+                            short strength = Convert.ToInt16(xml.ReadElementString("Strength"));
+                            short agility = Convert.ToInt16(xml.ReadElementString("Agility"));
+                            short speed = Convert.ToInt16(xml.ReadElementString("Speed"));
+                            int image = Convert.ToInt32(xml.ReadElementString("Image"));
+                            brutes.Add(name,new Brute(name, level, life, strength, agility, speed, image));
+                        }
                     }
+
                 }
-
+                xml.Close();
             }
-            xml.Close();
-
             return brutes;
         }
     }
