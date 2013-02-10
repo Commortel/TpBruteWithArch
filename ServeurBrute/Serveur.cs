@@ -12,7 +12,7 @@ namespace ServeurBrute
     {
         #region Fields
 
-        private ArrayList acceptList;
+        public static ArrayList acceptList = new ArrayList();
 
         #endregion Fields
 
@@ -21,10 +21,7 @@ namespace ServeurBrute
 
         #region Constructors
 
-        public Serveur()
-        {
-            this.acceptList = new ArrayList();
-        }
+        public Serveur(){}
 
         #endregion Constructors
 

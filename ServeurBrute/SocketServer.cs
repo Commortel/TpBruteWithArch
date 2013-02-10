@@ -32,7 +32,7 @@ namespace ServeurBrute
         public void GetQuery()
         {
             this.InitializeUser();
-            while (true)
+            while (this.GetSocket().Connected)
             {
                 Reader rd = this.GetReader();
                 int d = rd.ReadDiscriminant();
@@ -52,6 +52,8 @@ namespace ServeurBrute
                         break;
                     case ProtocoleImplementation.QUERY_DECONNEXION:
                         (new Query(this.GetWriter())).Deconnection();
+                        this.GetSocket().Close();
+                        Serveur.acceptList.Remove(this.GetSocket());
                         break;
                     case ProtocoleImplementation.QUERY_LOGIN:
                         (new Query(this.GetWriter())).Login(rd.ReadString(), rd.ReadString());
@@ -73,7 +75,7 @@ namespace ServeurBrute
 
         private void InitializeUser()
         {
-            SocketServer.listUser.Add("admin", "admin");
+            SocketServer.listBrute = DataManager.Read();
         }
 
         #endregion Methods

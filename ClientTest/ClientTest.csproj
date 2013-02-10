@@ -53,6 +53,13 @@
       <Project>{D0AF0038-10F1-4418-A80C-720090B6187F}</Project>
       <Name>Protocole</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ServeurBrute\ServeurBrute.csproj">
+      <Project>{CB25C165-D5C9-461C-9B70-03205144F0BF}</Project>
+      <Name>ServeurBrute</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

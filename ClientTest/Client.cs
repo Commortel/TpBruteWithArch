@@ -19,7 +19,6 @@ namespace ClientTest
         private Thread GetRead;
         public static Brute myBrute = new Brute();
         public static Brute otherBrute = new Brute();
-        private bool IsConnected = true;
         
         #endregion Fields
 
@@ -60,7 +59,7 @@ namespace ClientTest
         public void SendQuery()
         {
             String tmp = null;
-            while (this.IsConnected)
+            while (ClientSocket.Connected)
             {
                 Console.Write("Commande : "); 
                 tmp = Console.ReadLine();
