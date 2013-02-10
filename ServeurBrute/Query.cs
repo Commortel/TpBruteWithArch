@@ -72,12 +72,17 @@ namespace ServeurBrute
          public void NewBrute(String name)
          {
              Console.WriteLine("NewBrute");
-             Brute brute = new Brute(name);
-             brute.randomValue();
-             SocketServer.listBrute.Add(name,brute);
-             this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_OK);
+             if(!SocketServer.listBrute.ContainsKey(name))
+             {
+                 Brute brute = new Brute(name);
+                 brute.randomValue();
+                 SocketServer.listBrute.Add(name,brute);
+                 this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_OK);
+            }
+             else
+                 this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_KO);
              this.GetWriter.Send();
-             Console.WriteLine("NewBrute" + SocketServer.listBrute.Count);
+             Console.WriteLine("NewBrute");
          }
 
          public void Deconnection()
