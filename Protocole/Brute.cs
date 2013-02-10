@@ -114,7 +114,7 @@ namespace Protocole
         {
             Random n = new Random();
             this.level = 1;
-            this.life = (short)n.Next(20,30);
+            this.life = (short)n.Next(60,70);
             this.strength = (short)n.Next(2, 4);
             this.agility = (short)n.Next(2, 4);
             this.speed = (short)n.Next(2, 4);
