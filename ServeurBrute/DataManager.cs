@@ -14,7 +14,7 @@ namespace ServeurBrute
     {
         /// <summary> Expression XPath utilisée pour trouver le noeud XML renfermant les
         /// données relatives à l'utilisateur recherché</summary>
-        private const string PathFile = "User.xml";
+        private const string PathFile = "Users.xml";
 
         public static void Save(Dictionary<String, Brute> brutes)
         {
@@ -47,7 +47,8 @@ namespace ServeurBrute
         public static Dictionary<String,Brute> Read()
         {
             Dictionary<String, Brute> brutes = new Dictionary<String, Brute>();
-            if(File.Exists("User.xml"))
+            Console.WriteLine(File.Exists("Users.xml"));
+            if(File.Exists("Users.xml"))
             {
                 XmlTextReader xml = new XmlTextReader("Users.xml");
                 while (xml.Read())
