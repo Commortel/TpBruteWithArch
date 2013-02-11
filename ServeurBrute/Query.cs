@@ -42,7 +42,7 @@ namespace ServeurBrute
                  this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_DOWNLOAD_BRUTE);
                  this.GetWriter.CreateString(SocketServer.listBrute[name].getParam());
                  this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_DOWNLOAD_BRUTE_IMG);
-                 this.GetWriter.CreateImage("Perso-"+SocketServer.listBrute[name].Image+".jpg");
+                 this.GetWriter.CreateImage("../../res/perso/Perso-"+SocketServer.listBrute[name].Image+".jpg");
              }
              else
                  this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_KO);
@@ -120,7 +120,7 @@ namespace ServeurBrute
              this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_DOWNLOAD_BRUTE);
              this.GetWriter.CreateString(tmp.getParam());
              this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_DOWNLOAD_BRUTE_IMG);
-             this.GetWriter.CreateImage("Perso-" + tmp.Image + ".jpg");
+             this.GetWriter.CreateImage("../../res/perso/Perso-" + tmp.Image + ".jpg");
 
              this.GetWriter.Send();
              Console.WriteLine("FinGetOpponent");
