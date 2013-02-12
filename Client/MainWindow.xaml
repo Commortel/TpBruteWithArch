@@ -11,7 +11,7 @@
         <Button Content="NewAccount" Height="23" HorizontalAlignment="Left" Margin="350,350,0,0" Name="NewAccount" VerticalAlignment="Top" Width="120" />
 
         <TextBlock Height="36" HorizontalAlignment="Left" Margin="50,114,0,0" Name="Name" Text="Name" VerticalAlignment="Top" Width="150" TextAlignment="Center" FontSize="15"/>
-        <TextBlock Height="36" HorizontalAlignment="Left" Margin="400,114,0,0" Name="OtherName" Text="OtherName" VerticalAlignment="Top" TextAlignment="Center" Width="150" FontSize="15"/>
+        <TextBlock Height="36" Margin="170,114,0,0" Name="OtherName" Text="OtherName" VerticalAlignment="Top" TextAlignment="Center" Width="150" FontSize="15"/>
         <Image Height="250" HorizontalAlignment="Left" Margin="50,150,0,0" Name="MeImage" Stretch="Fill" VerticalAlignment="Top" Width="150" />
         <Image Height="250" HorizontalAlignment="Left" Margin="400,150,0,0" Name="OtherImage" Stretch="Fill" VerticalAlignment="Top" Width="150" />
         <Grid Name="MeStat" Margin="210,150,430,161" Background="#FFF2F2F2">

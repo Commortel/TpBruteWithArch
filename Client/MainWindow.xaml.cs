@@ -127,7 +127,7 @@ namespace Client
             OtherStat.Visibility = System.Windows.Visibility.Visible;
             OtherName.Visibility = System.Windows.Visibility.Visible;
 
-            OtherName.Text = this.client.MyBrute.Name;
+            OtherName.Text = this.client.OtherBrute.Name;
             TextOtherLevel.Text = Convert.ToString(this.client.OtherBrute.Level);
             TextOtherLife.Text = Convert.ToString(this.client.OtherBrute.Life);
             TextOtherStrength.Text = Convert.ToString(this.client.OtherBrute.Strength);
