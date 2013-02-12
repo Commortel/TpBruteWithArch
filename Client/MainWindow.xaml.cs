@@ -43,6 +43,18 @@ namespace Client
             MeStat.Visibility = System.Windows.Visibility.Hidden;
             OtherStat.Visibility = System.Windows.Visibility.Hidden;
             GetOpponent.Visibility = System.Windows.Visibility.Hidden;
+            FightWin.Visibility = System.Windows.Visibility.Hidden;
+            FightLose.Visibility = System.Windows.Visibility.Hidden;
+            Exit.Visibility = System.Windows.Visibility.Hidden;
+            Name.Visibility = System.Windows.Visibility.Hidden;
+            OtherName.Visibility = System.Windows.Visibility.Hidden;
+
+            TextPassword.Visibility = System.Windows.Visibility.Visible;
+            TextLogin.Visibility = System.Windows.Visibility.Visible;
+            BoxPassword.Visibility = System.Windows.Visibility.Visible;
+            BoxLogin.Visibility = System.Windows.Visibility.Visible;
+            Submit.Visibility = System.Windows.Visibility.Visible;
+            NewAccount.Visibility = System.Windows.Visibility.Visible;
 
             this.ip = IPAddress.Parse("127.0.0.1");
             this.ipEnd = new IPEndPoint(ip, ProtocoleImplementation.PORT_ID);
@@ -74,6 +86,9 @@ namespace Client
                 NewAccount.Visibility = System.Windows.Visibility.Hidden;
 
                 GetOpponent.Visibility = System.Windows.Visibility.Visible;
+                FightWin.Visibility = System.Windows.Visibility.Visible;
+                FightLose.Visibility = System.Windows.Visibility.Visible;
+                Exit.Visibility = System.Windows.Visibility.Visible;
                 MeImage.Visibility = System.Windows.Visibility.Visible;
                 this.client.GetBrute(BoxLogin.Text);
                 BitmapImage _image = new BitmapImage();
@@ -83,7 +98,9 @@ namespace Client
                 _image.EndInit();
                 MeImage.Source = _image;
                 MeStat.Visibility = System.Windows.Visibility.Visible;
+                Name.Visibility = System.Windows.Visibility.Visible;
 
+                Name.Text = this.client.MyBrute.Name;
                 TextLevel.Text = Convert.ToString(this.client.MyBrute.Level);
                 TextLife.Text = Convert.ToString(this.client.MyBrute.Life);
                 TextStrength.Text = Convert.ToString(this.client.MyBrute.Strength);
@@ -108,7 +125,9 @@ namespace Client
             OtherImage.Source = _image;
 
             OtherStat.Visibility = System.Windows.Visibility.Visible;
+            OtherName.Visibility = System.Windows.Visibility.Visible;
 
+            OtherName.Text = this.client.MyBrute.Name;
             TextOtherLevel.Text = Convert.ToString(this.client.OtherBrute.Level);
             TextOtherLife.Text = Convert.ToString(this.client.OtherBrute.Life);
             TextOtherStrength.Text = Convert.ToString(this.client.OtherBrute.Strength);
@@ -119,6 +138,22 @@ namespace Client
         protected override void OnClosed(EventArgs e) 
         { 
             this.client.Deconnection();
+        }
+
+        private void FightWin_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void FightLose_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            this.client.Deconnection();
+            this.Initialize();
         }
     }
 }
