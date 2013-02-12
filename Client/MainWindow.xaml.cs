@@ -39,7 +39,10 @@ namespace Client
         private void Initialize()
         {
             MeImage.Visibility = System.Windows.Visibility.Hidden;
-            OhterImage.Visibility = System.Windows.Visibility.Hidden;
+            OtherImage.Visibility = System.Windows.Visibility.Hidden;
+            MeStat.Visibility = System.Windows.Visibility.Hidden;
+            OtherStat.Visibility = System.Windows.Visibility.Hidden;
+            GetOpponent.Visibility = System.Windows.Visibility.Hidden;
 
             this.ip = IPAddress.Parse("127.0.0.1");
             this.ipEnd = new IPEndPoint(ip, ProtocoleImplementation.PORT_ID);
@@ -70,8 +73,8 @@ namespace Client
                 Submit.Visibility = System.Windows.Visibility.Hidden;
                 NewAccount.Visibility = System.Windows.Visibility.Hidden;
 
+                GetOpponent.Visibility = System.Windows.Visibility.Visible;
                 MeImage.Visibility = System.Windows.Visibility.Visible;
-                OhterImage.Visibility = System.Windows.Visibility.Visible;
                 this.client.GetBrute(BoxLogin.Text);
                 BitmapImage _image = new BitmapImage();
                 _image.BeginInit();
@@ -79,11 +82,38 @@ namespace Client
                 _image.UriSource = new Uri(@"MyBruteImg.jpg", UriKind.Relative);
                 _image.EndInit();
                 MeImage.Source = _image;
+                MeStat.Visibility = System.Windows.Visibility.Visible;
+
+                TextLevel.Text = Convert.ToString(this.client.MyBrute.Level);
+                TextLife.Text = Convert.ToString(this.client.MyBrute.Life);
+                TextStrength.Text = Convert.ToString(this.client.MyBrute.Strength);
+                TextAgility.Text = Convert.ToString(this.client.MyBrute.Agility);
+                TextSpeed.Text = Convert.ToString(this.client.MyBrute.Speed);
             }
             else
             {
                 MessageBox.Show("Fail Connection");
             }
+        }
+
+        private void GetOpponent_Click(object sender, RoutedEventArgs e)
+        {
+            this.client.GetOpponent();
+            OtherImage.Visibility = System.Windows.Visibility.Visible;
+            BitmapImage _image = new BitmapImage();
+            _image.BeginInit();
+            _image.CacheOption = BitmapCacheOption.OnLoad;
+            _image.UriSource = new Uri(@"OtherBruteImg.jpg", UriKind.Relative);
+            _image.EndInit();
+            OtherImage.Source = _image;
+
+            OtherStat.Visibility = System.Windows.Visibility.Visible;
+
+            TextOtherLevel.Text = Convert.ToString(this.client.OtherBrute.Level);
+            TextOtherLife.Text = Convert.ToString(this.client.OtherBrute.Life);
+            TextOtherStrength.Text = Convert.ToString(this.client.OtherBrute.Strength);
+            TextOtherAgility.Text = Convert.ToString(this.client.OtherBrute.Agility);
+            TextOtherSpeed.Text = Convert.ToString(this.client.OtherBrute.Speed);
         }
 
         protected override void OnClosed(EventArgs e) 
