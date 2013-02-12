@@ -76,7 +76,7 @@ namespace ServeurBrute
         private void InitializeUser()
         {
             SocketServer.listBrute = DataManager.Read();
-            SocketServer.listUser["admin"] = "admin";
+            SocketServer.listUser["Meyer"] = "Meyer";
         }
 
         #endregion Methods

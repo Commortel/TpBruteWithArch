@@ -72,6 +72,13 @@ namespace Client
 
                 MeImage.Visibility = System.Windows.Visibility.Visible;
                 OhterImage.Visibility = System.Windows.Visibility.Visible;
+                this.client.GetBrute(BoxLogin.Text);
+                BitmapImage _image = new BitmapImage();
+                _image.BeginInit();
+                _image.CacheOption = BitmapCacheOption.OnLoad;
+                _image.UriSource = new Uri(@"MyBruteImg.jpg", UriKind.Relative);
+                _image.EndInit();
+                MeImage.Source = _image;
             }
             else
             {

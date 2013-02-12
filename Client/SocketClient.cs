@@ -19,6 +19,19 @@ namespace Client
         #endregion Fields
 
         #region Accessors
+
+        public Brute MyBrute
+        {
+            get { return myBrute; }
+            set { myBrute = value; }
+        }
+
+        public Brute OtherBrute
+        {
+            get { return otherBrute; }
+            set { otherBrute = value; }
+        }
+
         #endregion Accessors
 
         #region Constructors
@@ -31,7 +44,6 @@ namespace Client
 
         public void GetBrute(String name)
         {
-            Console.WriteLine("GetBrute");
             this.GetWriter().CreateDiscriminant(ProtocoleImplementation.QUERY_GET_BRUTE);
             this.GetWriter().CreateString(name);
             this.GetWriter().Send();
@@ -51,7 +63,6 @@ namespace Client
                 Console.WriteLine(this.GetReader().ReadImage("MyBruteImg.jpg"));
                 Console.WriteLine(this.myBrute.ToString());
             }
-            Console.WriteLine("FinGetBrute");
         }
 
         public void DelBrute(String name)
