@@ -187,6 +187,12 @@ namespace Client
             Thread.Sleep(10);
         }
 
+        public void GetBonus(String name)
+        {
+            //this.GetWriter().CreateDiscriminant(ProtocoleImplementation.QUERY_GETBONUS);
+            //this.GetWriter().CreateString(name);
+        }
+
         #endregion Methods
     }
 }

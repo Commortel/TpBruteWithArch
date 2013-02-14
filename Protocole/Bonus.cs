@@ -17,6 +17,12 @@ namespace Protocole
 
         #region Accessors
 
+        public String Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
         public int Speed
         {
             get { return speed; }
@@ -71,5 +77,14 @@ namespace Protocole
         }
 
         #endregion Constructors
+
+        #region Methods
+
+        public String getParam()
+        {
+            return this.name + ":" + this.life + ":" + this.strength + ":" + this.agility + ":" + this.speed + ":" + this.image;
+        }
+
+        #endregion Methods
     }
 }

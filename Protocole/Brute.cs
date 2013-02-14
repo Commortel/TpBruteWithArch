@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using Protocole;
 
 namespace Protocole
 {
@@ -55,15 +56,16 @@ namespace Protocole
             set { level = value; }
         }
 
-        internal List<Bonus> BonusList
-        {
-            get { return bonusList; }
-        }
-
         public int Image
         {
             get { return image; }
             set { image = value; }
+        }
+
+        public List<Bonus> BonusList
+        {
+            get { return bonusList; }
+            set { bonusList = value; }
         }
 
         #endregion Accessors

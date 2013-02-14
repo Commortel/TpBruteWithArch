@@ -6,6 +6,7 @@ using Protocole;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+//using Protocole;
 
 namespace ClientTest
 {
@@ -133,6 +134,15 @@ namespace ClientTest
                 Client.otherBrute.Agility = Convert.ToInt16(tmp[4]);
                 Client.otherBrute.Speed = Convert.ToInt16(tmp[5]);
                 Client.otherBrute.Image = Convert.ToInt32(tmp[6]);
+                //this.GetReader().ReadDiscriminant();
+                /*String[] tmpBonus = this.GetReader().ReadStringParam();
+                Client.otherBrute.BonusList[Client.otherBrute.BonusList.Count].Name = tmpBonus[0];
+                Client.otherBrute.BonusList[Client.otherBrute.BonusList.Count].Life = Convert.ToInt16(tmpBonus[1]);
+                Client.otherBrute.BonusList[Client.otherBrute.BonusList.Count].Strength = Convert.ToInt16(tmpBonus[2]);
+                Client.otherBrute.BonusList[Client.otherBrute.BonusList.Count].Agility = Convert.ToInt16(tmpBonus[3]);
+                Client.otherBrute.BonusList[Client.otherBrute.BonusList.Count].Speed = Convert.ToInt16(tmpBonus[4]);
+                Client.otherBrute.BonusList[Client.otherBrute.BonusList.Count].Image = Convert.ToInt32(tmpBonus[5]);
+                Console.WriteLine(this.GetReader().ReadImage("Bonus1.png"));*/
                 this.GetReader().ReadDiscriminant();
                 Console.WriteLine(this.GetReader().ReadImage("OtherBruteImg.jpg"));
                 Console.WriteLine(Client.otherBrute.ToString());
@@ -156,21 +166,27 @@ namespace ClientTest
         public void Populate()
         {
             this.CreateNewBrute("Meyer");
-            Thread.Sleep(10);
+            Thread.Sleep(1);
             this.CreateNewBrute("Thibaut");
-            Thread.Sleep(10);
+            Thread.Sleep(1);
             this.CreateNewBrute("Chevalier");
-            Thread.Sleep(10);
+            Thread.Sleep(1);
             this.CreateNewBrute("Simon");
-            Thread.Sleep(10);
+            Thread.Sleep(1);
             this.CreateNewBrute("Lacroix");
-            Thread.Sleep(10);
+            Thread.Sleep(1);
             this.CreateNewBrute("Florent");
-            Thread.Sleep(10);
+            Thread.Sleep(1);
             this.CreateNewBrute("Daver");
-            Thread.Sleep(10);
+            Thread.Sleep(1);
             this.CreateNewBrute("Léonard");
-            Thread.Sleep(10);
+            Thread.Sleep(1);
+        }
+
+        public void GetBonus(String name)
+        {
+            //this.GetWriter().CreateDiscriminant(ProtocoleImplementation.QUERY_GETBONUS);
+            //this.GetWriter().CreateString(name);
         }
 
         #endregion Methods

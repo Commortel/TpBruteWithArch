@@ -31,6 +31,7 @@ namespace Protocole
         public const byte QUERY_GET_LIST_BRUTE = (byte)0x0009;
         public const byte QUERY_FIGHT = (byte)0x0010;
         public const byte QUERY_POPULATE = (byte)0x0011;
+        public const byte QUERY_GETBONUS = (byte)0x0012;
 
         // Answer
         public const byte ANSWER_OK = (byte)0x0030;
@@ -50,5 +51,16 @@ namespace Protocole
         public const String GET_OPPONENT = "GetOpponent";
         public const String GET_LIST_BRUTE = "ListBrute";
         public const String POPULATE = "Populate";
+
+        /*public Dictionary<String,Bonus> MakeListBonus()
+        {
+            Dictionary<String, Bonus> listBonus = new Dictionary<String, Bonus>();
+            listBonus.Add("Sword",new Bonus("Sword",0,15,5,5,1));
+            return listBonus;
+        }*/
+
+        //Bonus
+        //public Dictionary<String, Bonus> listBonus = MakeListBonus();
+        
     }
 }

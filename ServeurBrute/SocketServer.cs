@@ -67,6 +67,9 @@ namespace ServeurBrute
                     case ProtocoleImplementation.QUERY_GET_LIST_BRUTE:
                         (new Query(this.GetWriter())).ListeBrute();
                         break;
+                    /*case ProtocoleImplementation.QUERY_GETBONUS:
+                        (new Query(this.GetWriter())).GetBonus(rd.ReadString());
+                        break;*/
                     default:
                         break;
                 }
