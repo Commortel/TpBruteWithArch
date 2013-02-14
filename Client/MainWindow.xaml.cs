@@ -38,6 +38,7 @@ namespace Client
 
         private void Initialize()
         {
+            MainGrid.Background = new SolidColorBrush(Color.FromRgb(250, 248, 195));
             MeImage.Visibility = System.Windows.Visibility.Hidden;
             OtherImage.Visibility = System.Windows.Visibility.Hidden;
             MeStat.Visibility = System.Windows.Visibility.Hidden;
@@ -51,11 +52,10 @@ namespace Client
             MeBonusImage.Visibility = System.Windows.Visibility.Hidden;
             OtherBonusImage.Visibility = System.Windows.Visibility.Hidden;
 
-            TextPassword.Visibility = System.Windows.Visibility.Visible;
-            TextLogin.Visibility = System.Windows.Visibility.Visible;
             BoxPassword.Visibility = System.Windows.Visibility.Visible;
             BoxLogin.Visibility = System.Windows.Visibility.Visible;
             Submit.Visibility = System.Windows.Visibility.Visible;
+            Submit.Background = new SolidColorBrush(Color.FromRgb(250, 248, 195));
             NewAccount.Visibility = System.Windows.Visibility.Visible;
 
             this.ip = IPAddress.Parse("127.0.0.1");
@@ -80,8 +80,6 @@ namespace Client
 
             if (this.client.Login(BoxLogin.Text, BoxPassword.Text))
             {
-                TextPassword.Visibility = System.Windows.Visibility.Hidden;
-                TextLogin.Visibility = System.Windows.Visibility.Hidden;
                 BoxPassword.Visibility = System.Windows.Visibility.Hidden;
                 BoxLogin.Visibility = System.Windows.Visibility.Hidden;
                 Submit.Visibility = System.Windows.Visibility.Hidden;
@@ -94,6 +92,7 @@ namespace Client
                 Exit.Visibility = System.Windows.Visibility.Visible;
                 MeImage.Visibility = System.Windows.Visibility.Visible;
                 this.client.GetBrute(BoxLogin.Text);
+
                 BitmapImage _image = new BitmapImage();
                 _image.BeginInit();
                 _image.CacheOption = BitmapCacheOption.OnLoad;
@@ -129,8 +128,7 @@ namespace Client
                             MeBonus3Image.Source = _imageb;
                             break;
                     }
-                } 
-                BitmapImage _imageb1 = new BitmapImage(), _imageb2 = new BitmapImage(), _imageb3 = new BitmapImage();
+                }           
             }
             else
             {
@@ -140,14 +138,16 @@ namespace Client
 
         private void GetOpponent_Click(object sender, RoutedEventArgs e)
         {
+            
             this.client.GetOpponent();
             OtherImage.Visibility = System.Windows.Visibility.Visible;
-            BitmapImage _image = new BitmapImage();
-            _image.BeginInit();
-            _image.CacheOption = BitmapCacheOption.OnLoad;
-            _image.UriSource = new Uri(@"OtherBruteImg.jpg", UriKind.Relative);
-            _image.EndInit();
-            OtherImage.Source = _image;
+            BitmapImage _imageOther = new BitmapImage();
+            _imageOther.BeginInit();
+            _imageOther.CacheOption = BitmapCacheOption.OnLoad;
+            _imageOther.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+            _imageOther.UriSource = new Uri(@"OtherBruteImg.jpg", UriKind.Relative);
+            _imageOther.EndInit();
+            OtherImage.Source = _imageOther;
             OtherBonusImage.Visibility = System.Windows.Visibility.Visible;
             OtherStat.Visibility = System.Windows.Visibility.Visible;
             OtherNameTitle.Visibility = System.Windows.Visibility.Visible;
@@ -158,6 +158,8 @@ namespace Client
             TextOtherStrength.Text = Convert.ToString(this.client.OtherBrute.Strength);
             TextOtherAgility.Text = Convert.ToString(this.client.OtherBrute.Agility);
             TextOtherSpeed.Text = Convert.ToString(this.client.OtherBrute.Speed);
+
+            this.UpdateLayout();
         }
 
         protected override void OnClosed(EventArgs e) 
@@ -168,6 +170,7 @@ namespace Client
         private void FightWin_Click(object sender, RoutedEventArgs e)
         {
             this.client.UpdateBrute(this.client.MyBrute.Name, true);
+            this.client.GetBrute(this.client.MyBrute.Name);
 
             NameTitle.Text = this.client.MyBrute.Name;
             TextLevel.Text = Convert.ToString(this.client.MyBrute.Level);
@@ -175,11 +178,19 @@ namespace Client
             TextStrength.Text = Convert.ToString(this.client.MyBrute.Strength);
             TextAgility.Text = Convert.ToString(this.client.MyBrute.Agility);
             TextSpeed.Text = Convert.ToString(this.client.MyBrute.Speed);
+
         }
 
         private void FightLose_Click(object sender, RoutedEventArgs e)
         {
-
+            for (int i = 0; i < 1000; i++) {
+                BitmapImage _imageOther = new BitmapImage();
+                _imageOther.BeginInit();
+                _imageOther.CacheOption = BitmapCacheOption.OnLoad;
+                _imageOther.UriSource = new Uri(@"OtherBruteImg.jpg", UriKind.Relative);
+                _imageOther.EndInit();
+                OtherImage.Source = _imageOther;         
+            }
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
@@ -188,7 +199,7 @@ namespace Client
             this.Initialize();
         }
 
-        private void MeBonus1Image_ImageFailed(object sender, ExceptionRoutedEventArgs e)
+        private void NewAccount_Click(object sender, RoutedEventArgs e)
         {
 
         }

@@ -79,11 +79,15 @@ namespace ServeurBrute
 
         private void Initialize()
         {
-            SocketServer.listBrute = DataManager.Read();
-            SocketServer.listUser["Meyer"] = "Meyer";
-            SocketServer.listBonus.Add("Sword",new Bonus("Sword",0,15,5,5,1));
-            SocketServer.listBonus.Add("Trident",new Bonus("Trident",0,20,-5,5,2));
-            SocketServer.listBonus.Add("Knife",new Bonus("Knife",0,2,15,15,1));
+            try
+            {
+                SocketServer.listBrute = DataManager.Read();
+                SocketServer.listUser["Meyer"] = "Meyer";
+                SocketServer.listBonus.Add("Sword", new Bonus("Sword", 0, 15, 5, 5, 1));
+                SocketServer.listBonus.Add("Trident", new Bonus("Trident", 0, 20, -5, 5, 2));
+                SocketServer.listBonus.Add("Knife", new Bonus("Knife", 0, 2, 15, 15, 1));
+            }
+            catch (ArgumentException) { }
         }
 
         #endregion Methods

@@ -121,6 +121,9 @@ namespace Protocole
             this.agility = (short)n.Next(2, 4);
             this.speed = (short)n.Next(2, 4);
             this.image = n.Next(1,13);
+            this.BonusList.Add(new Bonus("Sword",0,15,5,5,1));
+            this.BonusList.Add(new Bonus("Trident",0,20,-5,5,2));
+            this.BonusList.Add(new Bonus("Knife",0,2,15,15,1));
         }
 
         public String getParam()
