@@ -93,12 +93,7 @@ namespace Client
                 MeImage.Visibility = System.Windows.Visibility.Visible;
                 this.client.GetBrute(BoxLogin.Text);
 
-                BitmapImage _image = new BitmapImage();
-                _image.BeginInit();
-                _image.CacheOption = BitmapCacheOption.OnLoad;
-                _image.UriSource = new Uri(@"MyBruteImg.jpg", UriKind.Relative);
-                _image.EndInit();
-                MeImage.Source = _image;
+                MeImage.Source = this.CreateImage("MyBruteImg.jpg");
                 MeStat.Visibility = System.Windows.Visibility.Visible;
                 NameTitle.Visibility = System.Windows.Visibility.Visible;
 
@@ -111,21 +106,16 @@ namespace Client
 
                 for (int i = 0; i < this.client.MyBrute.BonusList.Count; i++)
                 {
-                    BitmapImage _imageb = new BitmapImage();
-                    _imageb.BeginInit();
-                    _imageb.CacheOption = BitmapCacheOption.OnLoad;
-                    _imageb.UriSource = new Uri(@"Bonus" + i + ".png", UriKind.Relative);
-                    _imageb.EndInit();
                     switch(i)
                     {
                         case 1:
-                            MeBonus1Image.Source = _imageb;
+                            MeBonus1Image.Source = this.CreateImage("Bonus" + i + ".png");
                             break;
                         case 2:
-                            MeBonus2Image.Source = _imageb;
+                            MeBonus2Image.Source = this.CreateImage("Bonus" + i + ".png");
                             break;
                         case 3:
-                            MeBonus3Image.Source = _imageb;
+                            MeBonus3Image.Source = this.CreateImage("Bonus" + i + ".png");
                             break;
                     }
                 }           
@@ -141,13 +131,7 @@ namespace Client
             
             this.client.GetOpponent();
             OtherImage.Visibility = System.Windows.Visibility.Visible;
-            BitmapImage _imageOther = new BitmapImage();
-            _imageOther.BeginInit();
-            _imageOther.CacheOption = BitmapCacheOption.OnLoad;
-            _imageOther.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-            _imageOther.UriSource = new Uri(@"OtherBruteImg.jpg", UriKind.Relative);
-            _imageOther.EndInit();
-            OtherImage.Source = _imageOther;
+            OtherImage.Source = this.CreateImage("OtherBruteImg.jpg"); 
             OtherBonusImage.Visibility = System.Windows.Visibility.Visible;
             OtherStat.Visibility = System.Windows.Visibility.Visible;
             OtherNameTitle.Visibility = System.Windows.Visibility.Visible;
@@ -182,15 +166,7 @@ namespace Client
         }
 
         private void FightLose_Click(object sender, RoutedEventArgs e)
-        {
-            for (int i = 0; i < 1000; i++) {
-                BitmapImage _imageOther = new BitmapImage();
-                _imageOther.BeginInit();
-                _imageOther.CacheOption = BitmapCacheOption.OnLoad;
-                _imageOther.UriSource = new Uri(@"OtherBruteImg.jpg", UriKind.Relative);
-                _imageOther.EndInit();
-                OtherImage.Source = _imageOther;         
-            }
+        {     
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
@@ -202,6 +178,17 @@ namespace Client
         private void NewAccount_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private BitmapImage CreateImage(string path)
+        {
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.CacheOption = BitmapCacheOption.OnLoad;
+            image.CreateOptions = BitmapCreateOptions.IgnoreImageCache; 
+            image.UriSource = new Uri(@""+path, UriKind.Relative);
+            image.EndInit();
+            return image;
         }
     }
 }
