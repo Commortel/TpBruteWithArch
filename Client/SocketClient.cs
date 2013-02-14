@@ -62,6 +62,8 @@ namespace Client
                 this.GetReader().ReadDiscriminant();
                 Console.WriteLine(this.GetReader().ReadImage("MyBruteImg.jpg"));
                 Console.WriteLine(this.myBrute.ToString());
+                for (int i = 0; i < this.MyBrute.BonusList.Count; i++)
+                    this.GetBonus(this.MyBrute.BonusList[i].Name, i, this.MyBrute);
             }
         }
 
@@ -148,8 +150,9 @@ namespace Client
                 this.otherBrute.Speed = Convert.ToInt16(tmp[5]);
                 this.otherBrute.Image = Convert.ToInt32(tmp[6]);
                 this.GetReader().ReadDiscriminant();
-                Console.WriteLine(this.GetReader().ReadImage("OtherBruteImg.jpg"));
-                Console.WriteLine(this.otherBrute.ToString());
+                this.GetReader().ReadImage("OtherBruteImg.jpg");
+                for(int i = 0; i < this.otherBrute.BonusList.Count; i++)
+                    this.GetBonus(this.otherBrute.BonusList[i].Name,i,this.otherBrute);
             }
 
             Console.WriteLine("FinGetBrute");
@@ -187,10 +190,25 @@ namespace Client
             Thread.Sleep(10);
         }
 
-        public void GetBonus(String name)
+        public void GetBonus(String name, int nbBonus, Brute brute)
         {
-            //this.GetWriter().CreateDiscriminant(ProtocoleImplementation.QUERY_GETBONUS);
-            //this.GetWriter().CreateString(name);
+            this.GetWriter().CreateDiscriminant(ProtocoleImplementation.QUERY_GETBONUS);
+            this.GetWriter().CreateString(name);
+            this.GetWriter().Send();
+            if (this.GetReader().ReadDiscriminant() == ProtocoleImplementation.ANSWER_KO)
+                Console.WriteLine("Error Download Brute");
+            else
+            {
+                this.GetReader().ReadDiscriminant();
+                String[] tmp = this.GetReader().ReadStringParam();
+                brute.BonusList[nbBonus].Name = tmp[0];
+                brute.BonusList[nbBonus].Life = Convert.ToInt16(tmp[1]);
+                brute.BonusList[nbBonus].Strength = Convert.ToInt16(tmp[2]);
+                brute.BonusList[nbBonus].Agility = Convert.ToInt16(tmp[3]);
+                brute.BonusList[nbBonus].Speed = Convert.ToInt16(tmp[4]);
+                brute.BonusList[nbBonus].Image = Convert.ToInt32(tmp[5]);
+                this.GetReader().ReadImage("Bonus" + nbBonus + ".png");
+            }
         }
 
         #endregion Methods

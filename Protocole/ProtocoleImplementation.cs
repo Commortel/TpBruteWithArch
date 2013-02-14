@@ -51,16 +51,6 @@ namespace Protocole
         public const String GET_OPPONENT = "GetOpponent";
         public const String GET_LIST_BRUTE = "ListBrute";
         public const String POPULATE = "Populate";
-
-        /*public Dictionary<String,Bonus> MakeListBonus()
-        {
-            Dictionary<String, Bonus> listBonus = new Dictionary<String, Bonus>();
-            listBonus.Add("Sword",new Bonus("Sword",0,15,5,5,1));
-            return listBonus;
-        }*/
-
-        //Bonus
-        //public Dictionary<String, Bonus> listBonus = MakeListBonus();
         
     }
 }

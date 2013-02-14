@@ -10,8 +10,8 @@
         <Button Content="Submit" Height="23" HorizontalAlignment="Left" Margin="350,300,0,0" Name="Submit" VerticalAlignment="Top" Width="120" Click="Submit_Click" />
         <Button Content="NewAccount" Height="23" HorizontalAlignment="Left" Margin="350,350,0,0" Name="NewAccount" VerticalAlignment="Top" Width="120" />
 
-        <TextBlock Height="36" HorizontalAlignment="Left" Margin="50,114,0,0" Name="Name" Text="Name" VerticalAlignment="Top" Width="150" TextAlignment="Center" FontSize="15"/>
-        <TextBlock Height="36" Margin="170,114,0,0" Name="OtherName" Text="OtherName" VerticalAlignment="Top" TextAlignment="Center" Width="150" FontSize="15"/>
+        <TextBlock Height="36" Name="NameTitle" Text="Name"  HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="50,114,0,0" Width="150" TextAlignment="Center" FontSize="15"/>
+        <TextBlock Height="36" Name="OtherNameTitle" Margin="170,114,0,0"  Text="OtherName" VerticalAlignment="Top" TextAlignment="Center" Width="150" FontSize="15" />
         <Image Height="250" HorizontalAlignment="Left" Margin="50,150,0,0" Name="MeImage" Stretch="Fill" VerticalAlignment="Top" Width="150" />
         <Image Height="250" HorizontalAlignment="Left" Margin="400,150,0,0" Name="OtherImage" Stretch="Fill" VerticalAlignment="Top" Width="150" />
         <Grid Name="MeStat" Margin="210,150,430,161" Background="#FFF2F2F2">
@@ -46,6 +46,23 @@
             <TextBlock Name="TextAgility" Text="Agility" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBlock Name="TextSpeed" Text="Speed" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
+        <Grid Name="MeBonusImage" Margin="50,400,430,80">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="100*" />
+            </Grid.ColumnDefinitions>
+            <!-- Vertical Accent Lines -->
+            <Border Grid.Column="0" Grid.RowSpan="10" BorderThickness="2" BorderBrush="Black"/>
+            <Border Grid.Column="1" Grid.RowSpan="10" BorderThickness="2" BorderBrush="Black"/>
+            <Border Grid.Column="2" Grid.RowSpan="10" BorderThickness="2" BorderBrush="Black"/>
+            <Image Name="MeBonus1Image" Stretch="Fill" ImageFailed="MeBonus1Image_ImageFailed" />
+            <Image Name="MeBonus2Image" Stretch="Fill" Grid.Column="1" />
+            <Image Name="MeBonus3Image" Stretch="Fill" Grid.Column="2" />
+         </Grid>
         <Grid Name="OtherStat" Margin="570,150,70,161" Background="#FFF2F2F2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50" />
@@ -77,6 +94,23 @@
             <TextBlock Name="TextOtherStrength" Text="Strength" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBlock Name="TextOtherAgility" Text="Agility" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBlock Name="TextOtherSpeed" Text="Speed" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="4"/>
+        </Grid>
+        <Grid Name="OtherBonusImage" Margin="400,400,70,80">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="100*" />
+            </Grid.ColumnDefinitions>
+            <!-- Vertical Accent Lines -->
+            <Border Grid.Column="0" Grid.RowSpan="10" BorderThickness="2" BorderBrush="Black"/>
+            <Border Grid.Column="1" Grid.RowSpan="10" BorderThickness="2" BorderBrush="Black"/>
+            <Border Grid.Column="2" Grid.RowSpan="10" BorderThickness="2" BorderBrush="Black"/>
+            <Image Name="OtherBonus1Image" Stretch="Fill" />
+            <Image Name="OtherBonus2Image" Stretch="Fill" Grid.Column="1" />
+            <Image Name="OtherBonus3Image" Stretch="Fill" Grid.Column="2" />
         </Grid>
         <Button Content="GetOpponent" Height="23" HorizontalAlignment="Left" Margin="60,34,0,0" Name="GetOpponent" VerticalAlignment="Top" Width="75" Click="GetOpponent_Click"/>
         <Button Content="FightWin" Height="23" HorizontalAlignment="Left" Margin="200,34,0,0" Name="FightWin" VerticalAlignment="Top" Width="75" Click="FightWin_Click"/>

@@ -5,7 +5,6 @@ using System.Text;
 using Protocole;
 using System.Net;
 using System.Net.Sockets;
-//using Protocole;
 
 namespace ServeurBrute
 {
@@ -120,10 +119,8 @@ namespace ServeurBrute
              Brute tmp = SocketServer.listBrute.ElementAt(new Random().Next(0,SocketServer.listBrute.Count)).Value;
              this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_DOWNLOAD_BRUTE);
              this.GetWriter.CreateString(tmp.getParam());
-             //this.GetBonus(tmp.Name);
              this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_DOWNLOAD_BRUTE_IMG);
              this.GetWriter.CreateImage("../../res/perso/Perso-" + tmp.Image + ".jpg");
-
              this.GetWriter.Send();
              Console.WriteLine("FinGetOpponent");
          }
@@ -152,13 +149,13 @@ namespace ServeurBrute
 
          public void GetBonus(String name)
          {
-            /* try
+            try
              {
-                 if (ProtocoleImplementation.listBonus.ContainsKey(name))
+                 if (SocketServer.listBonus.ContainsKey(name))
                  {
                      this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_OK);
-                     this.GetWriter.CreateString(ProtocoleImplementation.listBonus[name].getParam());
-                     this.GetWriter.CreateImage("../../res/bonus/arme-" + ProtocoleImplementation.listBonus[name].Image + ".png");
+                     this.GetWriter.CreateString(SocketServer.listBonus[name].getParam());
+                     this.GetWriter.CreateImage("../../res/bonus/arme-" + SocketServer.listBonus[name].Image + ".png");
                  }
                  else
                      this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_KO);
@@ -166,7 +163,7 @@ namespace ServeurBrute
              catch (KeyNotFoundException)
              {
                  this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_KO);
-             }*/
+             }
          }
 
         #endregion Methods

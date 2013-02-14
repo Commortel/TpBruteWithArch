@@ -15,6 +15,7 @@ namespace ServeurBrute
 
         public static Dictionary<String, Brute> listBrute = new Dictionary<String, Brute>();
         public static Dictionary<String, String> listUser = new Dictionary<String, String>();
+        public static Dictionary<String, Bonus> listBonus = new Dictionary<string,Bonus>();
 
         #endregion Fields
 
@@ -31,7 +32,7 @@ namespace ServeurBrute
 
         public void GetQuery()
         {
-            this.InitializeUser();
+            this.Initialize();
             while (this.GetSocket().Connected)
             {
                 Reader rd = this.GetReader();
@@ -67,19 +68,22 @@ namespace ServeurBrute
                     case ProtocoleImplementation.QUERY_GET_LIST_BRUTE:
                         (new Query(this.GetWriter())).ListeBrute();
                         break;
-                    /*case ProtocoleImplementation.QUERY_GETBONUS:
+                    case ProtocoleImplementation.QUERY_GETBONUS:
                         (new Query(this.GetWriter())).GetBonus(rd.ReadString());
-                        break;*/
+                        break;
                     default:
                         break;
                 }
             }
         }
 
-        private void InitializeUser()
+        private void Initialize()
         {
             SocketServer.listBrute = DataManager.Read();
             SocketServer.listUser["Meyer"] = "Meyer";
+            SocketServer.listBonus.Add("Sword",new Bonus("Sword",0,15,5,5,1));
+            SocketServer.listBonus.Add("Trident",new Bonus("Trident",0,20,-5,5,2));
+            SocketServer.listBonus.Add("Knife",new Bonus("Knife",0,2,15,15,1));
         }
 
         #endregion Methods
