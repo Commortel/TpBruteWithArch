@@ -149,6 +149,7 @@ namespace ServeurBrute
 
          public void GetBonus(String name)
          {
+             Console.WriteLine("DebutGetBonus");
             try
              {
                  if (SocketServer.listBonus.ContainsKey(name))
@@ -164,6 +165,7 @@ namespace ServeurBrute
              {
                  this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_KO);
              }
+            Console.WriteLine("FinGetBonus");
          }
 
         #endregion Methods
