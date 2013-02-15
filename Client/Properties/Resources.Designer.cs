@@ -60,9 +60,30 @@ namespace Client.Properties {
             }
         }
         
+        public static System.Drawing.Bitmap arbitre {
+            get {
+                object obj = ResourceManager.GetObject("arbitre", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Bitmap background_brute {
+            get {
+                object obj = ResourceManager.GetObject("background_brute", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         public static System.Drawing.Bitmap button {
             get {
                 object obj = ResourceManager.GetObject("button", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Bitmap tableau_bois {
+            get {
+                object obj = ResourceManager.GetObject("tableau_bois", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -17,7 +17,6 @@ using System.Collections;
 using System.Threading;
 using System.IO;
 using Protocole;
-using System.Windows.Interop;
 
 namespace Client
 {
@@ -26,10 +25,16 @@ namespace Client
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region Fields
+
         private IPAddress ip;
         private IPEndPoint ipEnd;
         private Socket ClientSocket;
         private SocketClient client;
+
+        #endregion Fields
+
+        #region Constructors
 
         public MainWindow()
         {
@@ -51,13 +56,25 @@ namespace Client
             OtherBonusImage.Visibility = System.Windows.Visibility.Hidden;
 
             Login.Visibility = System.Windows.Visibility.Visible;
-            SubmitImage.Source = this.CreateImage("../../Resources/button.gif");
+            SubmitImage.Source = this.CreateImage("Resources/button.gif");
             Submit.Background = new SolidColorBrush(Color.FromRgb(250, 248, 195));
+            NewAccountImage.Source = this.CreateImage("Resources/button.gif");
+            NewAccount.Background = new SolidColorBrush(Color.FromRgb(250, 248, 195));
+            MeBonusImage.Background = this.BitmapToBrush(this.CreateImage("Resources/tableau_bois.png"));
+            OtherBonusImage.Background = this.BitmapToBrush(this.CreateImage("Resources/tableau_bois.png"));
+            GetOpponent.Background = this.BitmapToBrush(this.CreateImage("Resources/button.gif"));
+            FightWin.Background = this.BitmapToBrush(this.CreateImage("Resources/button.gif"));
+            FightLose.Background = this.BitmapToBrush(this.CreateImage("Resources/button.gif"));
+            Exit.Background = this.BitmapToBrush(this.CreateImage("Resources/button.gif"));
 
             this.ip = IPAddress.Parse("127.0.0.1");
             this.ipEnd = new IPEndPoint(ip, ProtocoleImplementation.PORT_ID);
             this.ClientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         }
+
+        #endregion Constructors
+
+        #region Methods
 
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
@@ -194,5 +211,16 @@ namespace Client
             image.EndInit();
             return image;
         }
+
+        private ImageBrush BitmapToBrush(BitmapImage _image)
+        {
+            ImageBrush myBrush = new ImageBrush();
+            Image image = new Image();
+            image.Source = _image;
+            myBrush.ImageSource = image.Source;
+            return myBrush;
+        }
+
+        #endregion Methods
     }
 }
