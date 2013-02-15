@@ -68,7 +68,6 @@ namespace ServeurBrute
                 {
                     if (xml.Name.Equals("Brute") && (xml.NodeType == XmlNodeType.Element))
                     {
-                        Console.WriteLine("Brute"+x);
                         xml.Read();
                         String name = xml.ReadElementString("Name");
                         short level = Convert.ToInt16(xml.ReadElementString("Level"));
@@ -78,7 +77,6 @@ namespace ServeurBrute
                         short speed = Convert.ToInt16(xml.ReadElementString("Speed"));
                         int image = Convert.ToInt32(xml.ReadElementString("Image"));
                         Brute brute = new Brute(name, level, life, strength, agility, speed, image);
-                        xml.Read();
                         if(xml.Name.Equals("BonusList") && (xml.NodeType == XmlNodeType.Element))
                         {
                             XmlReader inner = xml.ReadSubtree();
@@ -86,7 +84,6 @@ namespace ServeurBrute
                             {
                                 if (inner.Name.Equals("Bonus") && (xml.NodeType == XmlNodeType.Element))
                                 {
-                                    Console.WriteLine("Bonus"+u);
                                     xml.Read();
                                     name = xml.ReadElementString("Name");
                                     life = Convert.ToInt16(xml.ReadElementString("Life"));
@@ -98,7 +95,9 @@ namespace ServeurBrute
                                 }
                             }
                             inner.Close();
+                            Console.WriteLine(brute.ToString());
                         }
+                        brutes.Add(brute.Name, brute);
                     }
 
                 }
