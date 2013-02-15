@@ -76,6 +76,16 @@ namespace Protocole
             this.image = image;
         }
 
+        public Bonus(String[] bonus)
+        {
+            this.name = bonus[0];
+            this.life = Convert.ToInt32(bonus[1]);
+            this.strength = Convert.ToInt32(bonus[2]);
+            this.agility = Convert.ToInt32(bonus[3]);
+            this.speed = Convert.ToInt32(bonus[4]);
+            this.image = Convert.ToInt32(bonus[5]);
+        }
+
         #endregion Constructors
 
         #region Methods

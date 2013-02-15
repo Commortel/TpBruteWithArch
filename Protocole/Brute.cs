@@ -133,8 +133,8 @@ namespace Protocole
 
         public override String ToString()
         {
-            return "Name : " + this.name + "\nLevel : " + this.level + "\nLife : " + this.life + "\nStrength : " + this.strength + "\nAgility : " 
-                + this.agility + "\n Speed : " + this.speed + "\n ImageNb : "+ this.image;
+            return "Name : " + this.name + "\nLevel : " + this.level + "\nLife : " + this.life + "\nStrength : " + this.strength + "\nAgility : "
+                + this.agility + "\n Speed : " + this.speed + "\n ImageNb : " + this.image + "\n Bonus : " + this.BonusList.Count;
         }
 
         public void Update()
