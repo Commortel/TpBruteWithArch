@@ -153,9 +153,9 @@
             <Border Grid.Column="0" Grid.RowSpan="10" BorderThickness="2" BorderBrush="Black"/>
             <Border Grid.Column="1" Grid.RowSpan="10" BorderThickness="2" BorderBrush="Black"/>
             <Border Grid.Column="2" Grid.RowSpan="10" BorderThickness="2" BorderBrush="Black"/>
-            <Image Name="OtherBonus1Image" Stretch="Fill" />
-            <Image Name="OtherBonus2Image" Stretch="Fill" Grid.Column="1" />
-            <Image Name="OtherBonus3Image" Stretch="Fill" Grid.Column="2" />
+            <Image Name="OtherBonus1Image" Stretch="Uniform" />
+            <Image Name="OtherBonus2Image" Stretch="Uniform" Grid.Column="1" />
+            <Image Name="OtherBonus3Image" Stretch="Uniform" Grid.Column="2" />
         </Grid>
         </Grid>
 </Window>

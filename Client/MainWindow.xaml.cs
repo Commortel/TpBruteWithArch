@@ -99,13 +99,13 @@ namespace Client
                     switch(i)
                     {
                         case 0:
-                            MeBonus1Image.Source = this.CreateImage("Bonus" + i + ".png");
+                            MeBonus1Image.Source = this.CreateImage("BruteBonus" + i + ".png");
                             break;
                         case 1:
-                            MeBonus2Image.Source = this.CreateImage("Bonus" + i + ".png");
+                            MeBonus2Image.Source = this.CreateImage("BruteBonus" + i + ".png");
                             break;
                         case 2:
-                            MeBonus3Image.Source = this.CreateImage("Bonus" + i + ".png");
+                            MeBonus3Image.Source = this.CreateImage("BruteBonus" + i + ".png");
                             break;
                     }
                 }           
@@ -132,6 +132,22 @@ namespace Client
             TextOtherStrength.Text = Convert.ToString(this.client.OtherBrute.Strength);
             TextOtherAgility.Text = Convert.ToString(this.client.OtherBrute.Agility);
             TextOtherSpeed.Text = Convert.ToString(this.client.OtherBrute.Speed);
+
+            for (int i = 0; i < this.client.OtherBrute.BonusList.Count; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        OtherBonus1Image.Source = this.CreateImage("OtherBruteBonus" + i + ".png");
+                        break;
+                    case 1:
+                        OtherBonus2Image.Source = this.CreateImage("OtherBruteBonus" + i + ".png");
+                        break;
+                    case 2:
+                        OtherBonus3Image.Source = this.CreateImage("OtherBruteBonus" + i + ".png");
+                        break;
+                }
+            } 
         }
 
         protected override void OnClosed(EventArgs e) 

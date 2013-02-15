@@ -43,6 +43,8 @@ namespace ServeurBrute
                  this.GetWriter.CreateString(SocketServer.listBrute[name].getParam());
                  this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_DOWNLOAD_BRUTE_IMG);
                  this.GetWriter.CreateImage("../../res/perso/Perso-"+SocketServer.listBrute[name].Image+".jpg");
+                 this.GetWriter.CreateLongInt(SocketServer.listBrute[name].BonusList.Count);
+                 foreach (Bonus bonus in SocketServer.listBrute[name].BonusList) { this.GetBonus(bonus.Name); }
              }
              else
                  this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_KO);
@@ -121,6 +123,8 @@ namespace ServeurBrute
              this.GetWriter.CreateString(tmp.getParam());
              this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_DOWNLOAD_BRUTE_IMG);
              this.GetWriter.CreateImage("../../res/perso/Perso-" + tmp.Image + ".jpg");
+             this.GetWriter.CreateLongInt(tmp.BonusList.Count);
+             foreach (Bonus bonus in tmp.BonusList) { this.GetBonus(bonus.Name); }
              this.GetWriter.Send();
              Console.WriteLine("FinGetOpponent");
          }

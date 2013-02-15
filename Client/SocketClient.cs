@@ -42,13 +42,13 @@ namespace Client
 
         #region Methods
 
-        public void GetBrute(String name)
+        public bool GetBrute(String name)
         {
             this.GetWriter().CreateDiscriminant(ProtocoleImplementation.QUERY_GET_BRUTE);
             this.GetWriter().CreateString(name);
             this.GetWriter().Send();
             if (this.GetReader().ReadDiscriminant() == ProtocoleImplementation.ANSWER_KO)
-                Console.WriteLine("Error Download Brute");
+                return false;
             else
             {
                 String[] tmp = this.GetReader().ReadStringParam();
@@ -60,58 +60,58 @@ namespace Client
                 this.myBrute.Speed = Convert.ToInt16(tmp[5]);
                 this.myBrute.Image = Convert.ToInt32(tmp[6]);
                 this.GetReader().ReadDiscriminant();
-                Console.WriteLine(this.GetReader().ReadImage("MyBruteImg.jpg"));
-                Console.WriteLine(this.myBrute.ToString());
-                for (int i = 0; i < this.MyBrute.BonusList.Count; i++)
-                    this.GetBonus(this.MyBrute.BonusList[i].Name, i, this.MyBrute);
+                this.GetReader().ReadImage("MyBruteImg.jpg");
+                int len = this.GetReader().ReadLongInt();
+                for (int i = 0; i < len; i++)
+                    this.GetBonus(i, this.MyBrute);
+                return true;
             }
         }
 
-        public void DelBrute(String name)
+        public bool DelBrute(String name)
         {
             this.GetWriter().CreateDiscriminant(ProtocoleImplementation.QUERY_DEL_BRUTE);
             this.GetWriter().CreateString(name);
             this.GetWriter().Send();
             if (this.GetReader().ReadDiscriminant() == ProtocoleImplementation.ANSWER_OK)
-                Console.WriteLine("DelBrute done");
+                return true;
             else
-                Console.WriteLine("Fail DelBrute");
+                return false;
         }
 
-        public void UpdateBrute(String name, bool result)
+        public bool UpdateBrute(String name, bool result)
         {
-            Console.WriteLine("Début UpdateBrute");
             this.GetWriter().CreateDiscriminant(ProtocoleImplementation.QUERY_UPDATE_BRUTE);
             this.GetWriter().CreateString(name);
             this.GetWriter().CreateBoolean(result);
             this.GetWriter().Send();
-            Console.WriteLine("Fin UpdateBrute");
+            return true;
         }
 
-        public void CreateNewBrute(String name)
+        public bool CreateNewBrute(String name)
         {
             Console.WriteLine(name);
             this.GetWriter().CreateDiscriminant(ProtocoleImplementation.QUERY_NEW_BRUTE);
             this.GetWriter().CreateString(name);
             this.GetWriter().Send();
             if (this.GetReader().ReadDiscriminant() == ProtocoleImplementation.ANSWER_OK)
-                Console.WriteLine("Succes");
+                return true;
             else
-                Console.WriteLine("Fail");
+                return false;
         }
 
-        public void Deconnection()
+        public bool Deconnection()
         {
             this.GetWriter().CreateDiscriminant(ProtocoleImplementation.QUERY_DECONNEXION);
             this.GetWriter().Send();
             if (this.GetReader().ReadDiscriminant() == ProtocoleImplementation.ANSWER_OK)
             {
-                Console.WriteLine("Deconnection");
                 this.GetSocket().Close();
                 this.Close();
+                return true;
             }
             else
-                Console.WriteLine("Fail");
+                return false;
         }
 
         public bool Login(String login, String password)
@@ -132,13 +132,12 @@ namespace Client
             this.GetWriter().Send();
         }
 
-        public void GetOpponent()
+        public bool GetOpponent()
         {
-            Console.WriteLine("GetBrute");
             this.GetWriter().CreateDiscriminant(ProtocoleImplementation.QUERY_GET_OPPONENT);
             this.GetWriter().Send();
             if (this.GetReader().ReadDiscriminant() == ProtocoleImplementation.ANSWER_KO)
-                Console.WriteLine("Error Download Brute");
+                return false;
             else
             {
                 String[] tmp = this.GetReader().ReadStringParam();
@@ -151,23 +150,21 @@ namespace Client
                 this.otherBrute.Image = Convert.ToInt32(tmp[6]);
                 this.GetReader().ReadDiscriminant();
                 this.GetReader().ReadImage("OtherBruteImg.jpg");
-                for(int i = 0; i < this.otherBrute.BonusList.Count; i++)
-                    this.GetBonus(this.otherBrute.BonusList[i].Name,i,this.otherBrute);
+                int len = this.GetReader().ReadLongInt();
+                for (int i = 0; i < len; i++)
+                    this.GetBonus(i, this.otherBrute);
+                return true;
             }
-
-            Console.WriteLine("FinGetBrute");
         }
 
         public void ListeBrute()
         {
-            Console.WriteLine("Début Liste Brute");
             this.GetWriter().CreateDiscriminant(ProtocoleImplementation.QUERY_GET_LIST_BRUTE);
             this.GetWriter().Send();
             int len = this.GetReader().ReadLongInt();
             Console.WriteLine(len);
             for (int i = 0; i < len; i++)
                 Console.WriteLine(this.GetReader().ReadString());
-            Console.WriteLine("Fin Liste Brute");
         }
 
         public void Populate()
@@ -190,24 +187,19 @@ namespace Client
             Thread.Sleep(10);
         }
 
-        public void GetBonus(String name, int nbBonus, Brute brute)
+        public bool GetBonus(int nbBonus, Brute brute)
         {
-            this.GetWriter().CreateDiscriminant(ProtocoleImplementation.QUERY_GETBONUS);
-            this.GetWriter().CreateString(name);
-            this.GetWriter().Send();
             if (this.GetReader().ReadDiscriminant() == ProtocoleImplementation.ANSWER_KO)
-                Console.WriteLine("Error Download Brute");
+                return false;
             else
             {
-                this.GetReader().ReadDiscriminant();
                 String[] tmp = this.GetReader().ReadStringParam();
-                brute.BonusList[nbBonus].Name = tmp[0];
-                brute.BonusList[nbBonus].Life = Convert.ToInt16(tmp[1]);
-                brute.BonusList[nbBonus].Strength = Convert.ToInt16(tmp[2]);
-                brute.BonusList[nbBonus].Agility = Convert.ToInt16(tmp[3]);
-                brute.BonusList[nbBonus].Speed = Convert.ToInt16(tmp[4]);
-                brute.BonusList[nbBonus].Image = Convert.ToInt32(tmp[5]);
-                this.GetReader().ReadImage("Bonus" + nbBonus + ".png");
+                brute.BonusList.Add(new Bonus(tmp));
+                if(MyBrute.Name.Equals(brute.Name))
+                    this.GetReader().ReadImage("BruteBonus" + nbBonus +".png");
+                else
+                    this.GetReader().ReadImage("OtherBruteBonus" + nbBonus + ".png");
+                return true;
             }
         }
 
