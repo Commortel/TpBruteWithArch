@@ -17,6 +17,7 @@ using System.Collections;
 using System.Threading;
 using System.IO;
 using Protocole;
+using System.Windows.Interop;
 
 namespace Client
 {
@@ -43,20 +44,15 @@ namespace Client
             OtherImage.Visibility = System.Windows.Visibility.Hidden;
             MeStat.Visibility = System.Windows.Visibility.Hidden;
             OtherStat.Visibility = System.Windows.Visibility.Hidden;
-            GetOpponent.Visibility = System.Windows.Visibility.Hidden;
-            FightWin.Visibility = System.Windows.Visibility.Hidden;
-            FightLose.Visibility = System.Windows.Visibility.Hidden;
-            Exit.Visibility = System.Windows.Visibility.Hidden;
+            Menu.Visibility = System.Windows.Visibility.Hidden;
             NameTitle.Visibility = System.Windows.Visibility.Hidden;
             OtherNameTitle.Visibility = System.Windows.Visibility.Hidden;
             MeBonusImage.Visibility = System.Windows.Visibility.Hidden;
             OtherBonusImage.Visibility = System.Windows.Visibility.Hidden;
 
-            BoxPassword.Visibility = System.Windows.Visibility.Visible;
-            BoxLogin.Visibility = System.Windows.Visibility.Visible;
-            Submit.Visibility = System.Windows.Visibility.Visible;
+            Login.Visibility = System.Windows.Visibility.Visible;
+            SubmitImage.Source = this.CreateImage("../../Resources/button.gif");
             Submit.Background = new SolidColorBrush(Color.FromRgb(250, 248, 195));
-            NewAccount.Visibility = System.Windows.Visibility.Visible;
 
             this.ip = IPAddress.Parse("127.0.0.1");
             this.ipEnd = new IPEndPoint(ip, ProtocoleImplementation.PORT_ID);
@@ -80,16 +76,10 @@ namespace Client
 
             if (this.client.Login(BoxLogin.Text, BoxPassword.Text))
             {
-                BoxPassword.Visibility = System.Windows.Visibility.Hidden;
-                BoxLogin.Visibility = System.Windows.Visibility.Hidden;
-                Submit.Visibility = System.Windows.Visibility.Hidden;
-                NewAccount.Visibility = System.Windows.Visibility.Hidden;
+                Login.Visibility = System.Windows.Visibility.Hidden;
 
+                Menu.Visibility = System.Windows.Visibility.Visible;
                 MeBonusImage.Visibility = System.Windows.Visibility.Visible;
-                GetOpponent.Visibility = System.Windows.Visibility.Visible;
-                FightWin.Visibility = System.Windows.Visibility.Visible;
-                FightLose.Visibility = System.Windows.Visibility.Visible;
-                Exit.Visibility = System.Windows.Visibility.Visible;
                 MeImage.Visibility = System.Windows.Visibility.Visible;
                 this.client.GetBrute(BoxLogin.Text);
 
@@ -108,13 +98,13 @@ namespace Client
                 {
                     switch(i)
                     {
-                        case 1:
+                        case 0:
                             MeBonus1Image.Source = this.CreateImage("Bonus" + i + ".png");
                             break;
-                        case 2:
+                        case 1:
                             MeBonus2Image.Source = this.CreateImage("Bonus" + i + ".png");
                             break;
-                        case 3:
+                        case 2:
                             MeBonus3Image.Source = this.CreateImage("Bonus" + i + ".png");
                             break;
                     }
@@ -142,8 +132,6 @@ namespace Client
             TextOtherStrength.Text = Convert.ToString(this.client.OtherBrute.Strength);
             TextOtherAgility.Text = Convert.ToString(this.client.OtherBrute.Agility);
             TextOtherSpeed.Text = Convert.ToString(this.client.OtherBrute.Speed);
-
-            this.UpdateLayout();
         }
 
         protected override void OnClosed(EventArgs e) 
