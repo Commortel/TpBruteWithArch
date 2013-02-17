@@ -22,10 +22,12 @@ namespace Client
         public BruteWindow()
         {
             InitializeComponent();
+            this.Initialize();
         }
 
         private void Initialize()
         {
+            MainGrid.Background = this.BitmapToBrush(this.CreateImage("Resources/background_brute.png"));
             LifeImage.Source = this.CreateImage("Resources/life.gif");
             StrengthImage.Source = this.CreateImage("Resources/strength.gif");
             AgilityImage.Source = this.CreateImage("Resources/agility.gif");

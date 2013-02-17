@@ -96,7 +96,6 @@ namespace Client
                 MeBonusImage.Visibility = System.Windows.Visibility.Visible;
                 this.client.GetBrute(BoxLogin.Text);
 
-                BruteTest.Background = this.BitmapToBrush(this.CreateImage("Resources/background_brute.png"));
                 BruteTest.BruteImageControl = "MyBruteImg.jpg";
                 BruteTest.NameTitleControl = this.client.MyBrute.Name;
                 BruteTest.StatBruteControl = this.StatBruteMaker(this.client.MyBrute);
@@ -125,12 +124,11 @@ namespace Client
 
         private void GetOpponent_Click(object sender, RoutedEventArgs e)
         {
-            
+            GetOpponent.IsEnabled = false;
             this.client.GetOpponent();
             BruteTestOther.Visibility = System.Windows.Visibility.Visible;
             OtherBonusImage.Visibility = System.Windows.Visibility.Visible;
 
-            BruteTestOther.Background = this.BitmapToBrush(this.CreateImage("Resources/background_brute.png"));
             BruteTestOther.BruteImageControl = "OtherBruteImg.jpg";
             BruteTestOther.NameTitleControl = this.client.OtherBrute.Name;
             BruteTestOther.StatBruteControl = this.StatBruteMaker(this.client.OtherBrute);
@@ -149,7 +147,8 @@ namespace Client
                         OtherBonus3Image.Source = this.CreateImage("OtherBruteBonus" + i + ".png");
                         break;
                 }
-            } 
+            }
+            GetOpponent.IsEnabled = true;
         }
 
         protected override void OnClosed(EventArgs e) 
