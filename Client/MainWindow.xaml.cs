@@ -45,8 +45,8 @@ namespace Client
         private void Initialize()
         {
             MainGrid.Background = new SolidColorBrush(Color.FromRgb(250, 248, 195));
-            Me.Visibility = System.Windows.Visibility.Hidden;
-            Other.Visibility = System.Windows.Visibility.Hidden;
+            BruteTest.Visibility = System.Windows.Visibility.Hidden;
+            BruteTestOther.Visibility = System.Windows.Visibility.Hidden;
             MeBonusImage.Visibility = System.Windows.Visibility.Hidden;
             OtherBonusImage.Visibility = System.Windows.Visibility.Hidden;
             Menu.Visibility = System.Windows.Visibility.Hidden;
@@ -62,19 +62,6 @@ namespace Client
             FightWin.Background = this.BitmapToBrush(this.CreateImage("Resources/button.gif"));
             FightLose.Background = this.BitmapToBrush(this.CreateImage("Resources/button.gif"));
             Exit.Background = this.BitmapToBrush(this.CreateImage("Resources/button.gif"));
-            Me.Background = this.BitmapToBrush(this.CreateImage("Resources/background_brute.png"));
-            Other.Background = this.BitmapToBrush(this.CreateImage("Resources/background_brute.png"));
-
-            TextLevel.Background = this.BitmapToBrush(this.CreateImage("Resources/level.png"));
-            LifeImage.Source = this.CreateImage("Resources/life.gif");
-            StrengthImage.Source = this.CreateImage("Resources/strength.gif");
-            AgilityImage.Source = this.CreateImage("Resources/agility.gif");
-            SpeedImage.Source = this.CreateImage("Resources/speed.gif");
-            TextOtherLevel.Background = this.BitmapToBrush(this.CreateImage("Resources/level.png"));
-            OLifeImage.Source = this.CreateImage("Resources/life.gif");
-            OStrengthImage.Source = this.CreateImage("Resources/strength.gif");
-            OAgilityImage.Source = this.CreateImage("Resources/agility.gif");
-            OSpeedImage.Source = this.CreateImage("Resources/speed.gif");
 
             this.ip = IPAddress.Parse("127.0.0.1");
             this.ipEnd = new IPEndPoint(ip, ProtocoleImplementation.PORT_ID);
@@ -105,17 +92,14 @@ namespace Client
                 Login.Visibility = System.Windows.Visibility.Hidden;
 
                 Menu.Visibility = System.Windows.Visibility.Visible;
-                Me.Visibility = System.Windows.Visibility.Visible;
+                BruteTest.Visibility = System.Windows.Visibility.Visible;
                 MeBonusImage.Visibility = System.Windows.Visibility.Visible;
                 this.client.GetBrute(BoxLogin.Text);
 
-                MeImage.Source = this.CreateImage("MyBruteImg.jpg");
-                NameTitle.Text = this.client.MyBrute.Name;
-                TextLevel.Text = Convert.ToString(this.client.MyBrute.Level);
-                TextLife.Text = Convert.ToString(this.client.MyBrute.Life);
-                TextStrength.Text = Convert.ToString(this.client.MyBrute.Strength);
-                TextAgility.Text = Convert.ToString(this.client.MyBrute.Agility);
-                TextSpeed.Text = Convert.ToString(this.client.MyBrute.Speed);
+                BruteTest.Background = this.BitmapToBrush(this.CreateImage("Resources/background_brute.png"));
+                BruteTest.BruteImageControl = "MyBruteImg.jpg";
+                BruteTest.NameTitleControl = this.client.MyBrute.Name;
+                BruteTest.StatBruteControl = this.StatBruteMaker(this.client.MyBrute);
 
                 for (int i = 0; i < this.client.MyBrute.BonusList.Count; i++)
                 {
@@ -143,16 +127,13 @@ namespace Client
         {
             
             this.client.GetOpponent();
-            Other.Visibility = System.Windows.Visibility.Visible;
+            BruteTestOther.Visibility = System.Windows.Visibility.Visible;
             OtherBonusImage.Visibility = System.Windows.Visibility.Visible;
-            OtherImage.Source = this.CreateImage("OtherBruteImg.jpg");         
 
-            OtherNameTitle.Text = this.client.OtherBrute.Name;
-            TextOtherLevel.Text = Convert.ToString(this.client.OtherBrute.Level);
-            TextOtherLife.Text = Convert.ToString(this.client.OtherBrute.Life);
-            TextOtherStrength.Text = Convert.ToString(this.client.OtherBrute.Strength);
-            TextOtherAgility.Text = Convert.ToString(this.client.OtherBrute.Agility);
-            TextOtherSpeed.Text = Convert.ToString(this.client.OtherBrute.Speed);
+            BruteTestOther.Background = this.BitmapToBrush(this.CreateImage("Resources/background_brute.png"));
+            BruteTestOther.BruteImageControl = "OtherBruteImg.jpg";
+            BruteTestOther.NameTitleControl = this.client.OtherBrute.Name;
+            BruteTestOther.StatBruteControl = this.StatBruteMaker(this.client.OtherBrute);
 
             for (int i = 0; i < this.client.OtherBrute.BonusList.Count; i++)
             {
@@ -181,17 +162,15 @@ namespace Client
             this.client.UpdateBrute(this.client.MyBrute.Name, true);
             this.client.GetBrute(this.client.MyBrute.Name);
 
-            NameTitle.Text = this.client.MyBrute.Name;
-            TextLevel.Text = Convert.ToString(this.client.MyBrute.Level);
-            TextLife.Text = Convert.ToString(this.client.MyBrute.Life);
-            TextStrength.Text = Convert.ToString(this.client.MyBrute.Strength);
-            TextAgility.Text = Convert.ToString(this.client.MyBrute.Agility);
-            TextSpeed.Text = Convert.ToString(this.client.MyBrute.Speed);
-
+            BruteTest.StatBruteControl = this.StatBruteMaker(this.client.MyBrute);
         }
 
         private void FightLose_Click(object sender, RoutedEventArgs e)
-        {     
+        {
+            this.client.UpdateBrute(this.client.OtherBrute.Name, true);
+            this.client.GetBrute(this.client.OtherBrute.Name);
+
+            BruteTestOther.StatBruteControl = this.StatBruteMaker(this.client.OtherBrute);
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
@@ -223,6 +202,17 @@ namespace Client
             image.Source = _image;
             myBrush.ImageSource = image.Source;
             return myBrush;
+        }
+
+        private List<string> StatBruteMaker(Brute brute)
+        {
+            List<String> tmp = new List<String>();
+            tmp.Add(Convert.ToString(brute.Level));
+            tmp.Add(Convert.ToString(brute.Life));
+            tmp.Add(Convert.ToString(brute.Strength));
+            tmp.Add(Convert.ToString(brute.Agility));
+            tmp.Add(Convert.ToString(brute.Speed));
+            return tmp;
         }
 
         #endregion Methods
