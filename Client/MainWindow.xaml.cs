@@ -45,15 +45,11 @@ namespace Client
         private void Initialize()
         {
             MainGrid.Background = new SolidColorBrush(Color.FromRgb(250, 248, 195));
-            MeImage.Visibility = System.Windows.Visibility.Hidden;
-            OtherImage.Visibility = System.Windows.Visibility.Hidden;
-            MeStat.Visibility = System.Windows.Visibility.Hidden;
-            OtherStat.Visibility = System.Windows.Visibility.Hidden;
-            Menu.Visibility = System.Windows.Visibility.Hidden;
-            NameTitle.Visibility = System.Windows.Visibility.Hidden;
-            OtherNameTitle.Visibility = System.Windows.Visibility.Hidden;
+            Me.Visibility = System.Windows.Visibility.Hidden;
+            Other.Visibility = System.Windows.Visibility.Hidden;
             MeBonusImage.Visibility = System.Windows.Visibility.Hidden;
             OtherBonusImage.Visibility = System.Windows.Visibility.Hidden;
+            Menu.Visibility = System.Windows.Visibility.Hidden;
 
             Login.Visibility = System.Windows.Visibility.Visible;
             SubmitImage.Source = this.CreateImage("Resources/button.gif");
@@ -66,6 +62,19 @@ namespace Client
             FightWin.Background = this.BitmapToBrush(this.CreateImage("Resources/button.gif"));
             FightLose.Background = this.BitmapToBrush(this.CreateImage("Resources/button.gif"));
             Exit.Background = this.BitmapToBrush(this.CreateImage("Resources/button.gif"));
+            Me.Background = this.BitmapToBrush(this.CreateImage("Resources/background_brute.png"));
+            Other.Background = this.BitmapToBrush(this.CreateImage("Resources/background_brute.png"));
+
+            TextLevel.Background = this.BitmapToBrush(this.CreateImage("Resources/level.png"));
+            LifeImage.Source = this.CreateImage("Resources/life.gif");
+            StrengthImage.Source = this.CreateImage("Resources/strength.gif");
+            AgilityImage.Source = this.CreateImage("Resources/agility.gif");
+            SpeedImage.Source = this.CreateImage("Resources/speed.gif");
+            TextOtherLevel.Background = this.BitmapToBrush(this.CreateImage("Resources/level.png"));
+            OLifeImage.Source = this.CreateImage("Resources/life.gif");
+            OStrengthImage.Source = this.CreateImage("Resources/strength.gif");
+            OAgilityImage.Source = this.CreateImage("Resources/agility.gif");
+            OSpeedImage.Source = this.CreateImage("Resources/speed.gif");
 
             this.ip = IPAddress.Parse("127.0.0.1");
             this.ipEnd = new IPEndPoint(ip, ProtocoleImplementation.PORT_ID);
@@ -96,14 +105,11 @@ namespace Client
                 Login.Visibility = System.Windows.Visibility.Hidden;
 
                 Menu.Visibility = System.Windows.Visibility.Visible;
+                Me.Visibility = System.Windows.Visibility.Visible;
                 MeBonusImage.Visibility = System.Windows.Visibility.Visible;
-                MeImage.Visibility = System.Windows.Visibility.Visible;
                 this.client.GetBrute(BoxLogin.Text);
 
                 MeImage.Source = this.CreateImage("MyBruteImg.jpg");
-                MeStat.Visibility = System.Windows.Visibility.Visible;
-                NameTitle.Visibility = System.Windows.Visibility.Visible;
-
                 NameTitle.Text = this.client.MyBrute.Name;
                 TextLevel.Text = Convert.ToString(this.client.MyBrute.Level);
                 TextLife.Text = Convert.ToString(this.client.MyBrute.Life);
@@ -137,11 +143,9 @@ namespace Client
         {
             
             this.client.GetOpponent();
-            OtherImage.Visibility = System.Windows.Visibility.Visible;
-            OtherImage.Source = this.CreateImage("OtherBruteImg.jpg"); 
+            Other.Visibility = System.Windows.Visibility.Visible;
             OtherBonusImage.Visibility = System.Windows.Visibility.Visible;
-            OtherStat.Visibility = System.Windows.Visibility.Visible;
-            OtherNameTitle.Visibility = System.Windows.Visibility.Visible;
+            OtherImage.Source = this.CreateImage("OtherBruteImg.jpg");         
 
             OtherNameTitle.Text = this.client.OtherBrute.Name;
             TextOtherLevel.Text = Convert.ToString(this.client.OtherBrute.Level);

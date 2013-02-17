@@ -2,27 +2,40 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:r="clr-namespace:Client.Properties"
-        Title="MainWindow" Height="600" Width="800"
+        Title="MainWindow" Height="600" Width="820"
         WindowStartupLocation="CenterScreen"
         >
     <Grid Name="MainGrid">
         <Grid.Resources>
+            <Style TargetType="{x:Type TextBlock}" x:Key="Title">
+                <Setter Property="TextBlock.FontWeight" Value="Bold" />
+                <Setter Property="TextBlock.FontSize" Value="18" />
+                <Setter Property="TextBlock.HorizontalAlignment" Value="Center" />
+                <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+                <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                <Setter Property="TextBlock.Width" Value="150" />
+                <Setter Property="TextBlock.Height" Value="36" />
+            </Style>
+            <Style TargetType="{x:Type Image}" x:Key="Image">
+                <Setter Property="Image.Stretch" Value="None" />
+                <Setter Property="Image.HorizontalAlignment" Value="Center" />
+                <Setter Property="Image.VerticalAlignment" Value="Center" />
+                <Setter Property="Image.Height" Value="250" />
+                <Setter Property="Image.Width" Value="150" />
+            </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="80" />
-            <RowDefinition Height="80" />
-            <RowDefinition Height="250" />
-            <RowDefinition Height="100*" />
+            <RowDefinition Height="350" />
+            <RowDefinition Height="130" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
-            <ColumnDefinition Width="200" />
-            <ColumnDefinition Width="200" />
-            <ColumnDefinition Width="400*" />
+            <ColumnDefinition Width="400" />
+            <ColumnDefinition Width="400" />
         </Grid.ColumnDefinitions>
         
         <!--********************* Menu **************-->
-        <StackPanel Name="Menu" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2">
+        <StackPanel Name="Menu" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2">
             <Button Content="GetOpponent" Name="GetOpponent" Height="23" Width="75" Click="GetOpponent_Click"/>
             <Button Content="FightWin" Name="FightWin" Height="23" Width="75" Click="FightWin_Click"/>
             <Button Content="FightLose" Name="FightLose" Height="23" Width="75" Click="FightLose_Click"/>
@@ -30,7 +43,7 @@
         </StackPanel>
 
         <!--********************* Login **************-->
-        <Grid Name="Login" HorizontalAlignment="Center" VerticalAlignment="Center" Width="240" Height="145" Grid.ColumnSpan="4" Grid.RowSpan="4">
+        <Grid Name="Login" HorizontalAlignment="Center" VerticalAlignment="Center" Width="240" Height="145" Grid.ColumnSpan="2" Grid.RowSpan="3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="35" />
                 <RowDefinition Height="35" />
@@ -46,12 +59,12 @@
             <TextBox Name="BoxLogin" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Width="150"/>
             <TextBox Name="BoxPassword" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Width="150"/>
             <Button Name="Submit" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"  Grid.Row="2" Grid.Column="1" Click="Submit_Click" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Padding="-2">
-                <Image Name="SubmitImage" Source="Resources/button.gif" Stretch="Fill" />
+                <Image Name="SubmitImage" Stretch="Fill" />
             </Button>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" FontWeight="Bold" Text="Jouez" />
             <Button Name="NewAccount" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Grid.Row="3" Grid.Column="1" Click="NewAccount_Click" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Padding="-2">
                 <StackPanel>
-                    <Image Name="NewAccountImage" Source="Resources/button.gif" Stretch="Fill" />
+                    <Image Name="NewAccountImage" Stretch="Fill" />
                 </StackPanel>
                 <Button.Triggers>
                         <!-- Lors du clic sur le bouton -->
@@ -70,104 +83,118 @@
         </Grid>
 
         <!--********************* MyBrute **************-->
-        <TextBlock Height="36" Name="NameTitle" Text="Name"  HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Width="150" FontSize="15" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <Image Height="250" HorizontalAlignment="Center" Name="MeImage" VerticalAlignment="Center" Width="150" Grid.Row="2"/>
-        <Grid Name="MeStat" Background="#FFF2F2F2" Grid.Row="2" Grid.Column="1">
+        <Grid Name="Me" Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
+                <RowDefinition Height="80" />
+                <RowDefinition Height="270" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100" />
-                    <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="200" />
             </Grid.ColumnDefinitions>
-            <!-- Horizontal Accent Lines -->
-            <Border Grid.ColumnSpan="10" BorderThickness="2" BorderBrush="Black"/>
-            <Border Grid.Row="2" Grid.ColumnSpan="10" BorderThickness="2" BorderBrush="Black"/>
-            <Border Grid.Row="4" Grid.ColumnSpan="10" BorderThickness="2" BorderBrush="Black"/>
-            <Border Grid.Row="6" Grid.ColumnSpan="10" BorderThickness="2" BorderBrush="Black"/>
-            <Border Grid.Row="8" Grid.ColumnSpan="10" BorderThickness="2" BorderBrush="Black"/>
-            <!-- Vertical Accent Lines -->
-            <Border Grid.Column="0" Grid.RowSpan="10" BorderThickness="2" BorderBrush="Black"/>
-            <Border Grid.Column="1" Grid.RowSpan="10" BorderThickness="2" BorderBrush="Black"/>
-            <Label Content="Level : " HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <Label Grid.Row="1" Content="Life : " HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <Label Grid.Row="2" Content="Strength : " HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <Label Grid.Row="3" Content="Agility : " HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Label Grid.Row="4" Content="Speed : " HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <TextBlock Name="TextLevel" Text="Level" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Name="TextLife" Text="Life" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Name="TextStrength" Text="Strength" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Name="TextAgility" Text="Agility" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Name="TextSpeed" Text="Speed" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Style="{StaticResource Title}" Name="NameTitle" Grid.ColumnSpan="2"/>
+        <Image Style="{StaticResource Image}" Name="MeImage" Grid.Row="1"/>
+        <Grid Name="MeStat" Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="80" />
+            </Grid.ColumnDefinitions>
+            <Image Grid.Row="1" HorizontalAlignment="Right" Name="LifeImage" VerticalAlignment="Center" Stretch="None" />
+            <Image Grid.Row="2" HorizontalAlignment="Right" Name="StrengthImage" VerticalAlignment="Center" Stretch="None" />
+            <Image Grid.Row="3" HorizontalAlignment="Right" Name="AgilityImage" VerticalAlignment="Center" Stretch="None" />
+            <Image Grid.Row="4" HorizontalAlignment="Right" Name="SpeedImage" VerticalAlignment="Center" Stretch="None" />
+            <Label Content="Level : " Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <Label Grid.Row="1" Content="Life : " Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <Label Grid.Row="2" Content="Strength : " Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <Label Grid.Row="3" Content="Agility : " Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <Label Grid.Row="4" Content="Speed : " Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <TextBlock Name="TextLevel" Text="Level" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBlock Name="TextLife" Text="Life" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBlock Name="TextStrength" Text="Strength" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBlock Name="TextAgility" Text="Agility" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBlock Name="TextSpeed" Text="Speed" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </Grid>
-        <Grid Name="MeBonusImage" Grid.Row="3" Grid.ColumnSpan="2">
+        </Grid>
+        <Grid Name="MeBonusImage" Grid.Row="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="100" />
+                <RowDefinition Height="55" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="100*" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
             </Grid.ColumnDefinitions>
             <!-- Vertical Accent Lines -->
-            <Image Name="MeBonus1Image" Stretch="Uniform"  />
-            <Image Name="MeBonus2Image" Stretch="Uniform" Grid.Column="1" />
-            <Image Name="MeBonus3Image" Stretch="Uniform" Grid.Column="2" />
-         </Grid>
+            <Image Name="MeBonus1Image" Stretch="None" />
+            <Image Name="MeBonus2Image" Stretch="None" Grid.Column="1" />
+            <Image Name="MeBonus3Image" Stretch="None" Grid.Column="2" />
+        </Grid>
 
         <!--********************* OtherBrute **************-->
-        <TextBlock Height="36" Name="OtherNameTitle" Text="Name"  HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Width="150" FontSize="15" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"/>
-        <Image Height="250" HorizontalAlignment="Center" Name="OtherImage" VerticalAlignment="Center" Width="150" Grid.Column="2" Grid.Row="2"/>
-        <Grid Name="OtherStat" Background="#FFF2F2F2" Grid.Row="2" Grid.Column="3">
+        <Grid Name="Other" Grid.Row="1" Grid.Column="1" >
             <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="50*" />
+                <RowDefinition Height="80" />
+                <RowDefinition Height="270" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="200" />
+            </Grid.ColumnDefinitions>
+        <TextBlock Style="{StaticResource Title}" Name="OtherNameTitle" Grid.ColumnSpan="2"/>
+        <Image Style="{StaticResource Image}" Name="OtherImage" Grid.Row="1"/>
+        <Grid Name="OtherStat" Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40" />
                 <ColumnDefinition Width="70" />
-                <ColumnDefinition Width="62*" />
+                <ColumnDefinition Width="70" />
             </Grid.ColumnDefinitions>
-            <!-- Horizontal Accent Lines -->
-            <Border Grid.ColumnSpan="10" BorderThickness="2" BorderBrush="Black"/>
-            <Border Grid.Row="2" Grid.ColumnSpan="10" BorderThickness="2" BorderBrush="Black"/>
-            <Border Grid.Row="4" Grid.ColumnSpan="10" BorderThickness="2" BorderBrush="Black"/>
-            <Border Grid.Row="6" Grid.ColumnSpan="10" BorderThickness="2" BorderBrush="Black"/>
-            <Border Grid.Row="8" Grid.ColumnSpan="10" BorderThickness="2" BorderBrush="Black"/>
-            <!-- Vertical Accent Lines -->
-            <Border Grid.Column="0" Grid.RowSpan="10" BorderThickness="2" BorderBrush="Black"/>
-            <Border Grid.Column="1" Grid.RowSpan="10" BorderThickness="2" BorderBrush="Black"/>
-            <Label Content="Level : " HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <Label Grid.Row="1" Content="Life : " HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <Label Grid.Row="2" Content="Strength : " HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Label Grid.Row="3" Content="Agility : " HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Label Grid.Row="4" Content="Speed : " HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <TextBlock Name="TextOtherLevel" Text="Level" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Name="TextOtherLife" Text="Life" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Name="TextOtherStrength" Text="Strength" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Name="TextOtherAgility" Text="Agility" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Name="TextOtherSpeed" Text="Speed" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="4"/>
+            <Image Grid.Row="1" HorizontalAlignment="Right" Name="OLifeImage" VerticalAlignment="Center" Stretch="None" />
+            <Image Grid.Row="2" HorizontalAlignment="Right" Name="OStrengthImage" VerticalAlignment="Center" Stretch="None" />
+            <Image Grid.Row="3" HorizontalAlignment="Right" Name="OAgilityImage" VerticalAlignment="Center" Stretch="None" />
+            <Image Grid.Row="4" HorizontalAlignment="Right" Name="OSpeedImage" VerticalAlignment="Center" Stretch="None" />
+            <Label Content="Level : " Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <Label Grid.Row="1" Content="Life : " Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <Label Grid.Row="2" Content="Strength : " Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <Label Grid.Row="3" Content="Agility : " Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <Label Grid.Row="4" Content="Speed : " Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <TextBlock Name="TextOtherLevel" Text="Level" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBlock Name="TextOtherLife" Text="Life" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBlock Name="TextOtherStrength" Text="Strength" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBlock Name="TextOtherAgility" Text="Agility" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBlock Name="TextOtherSpeed" Text="Speed" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="2" Grid.Row="4"/>
         </Grid>
-        <Grid Name="OtherBonusImage" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2">
+        </Grid>    
+        <Grid Name="OtherBonusImage" Grid.Row="2" Grid.Column="1" >
             <Grid.RowDefinitions>
-                <RowDefinition Height="100" />
+                <RowDefinition Height="55" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="100*" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
             </Grid.ColumnDefinitions>
-            <Image Name="OtherBonus1Image" Stretch="Uniform" />
-            <Image Name="OtherBonus2Image" Stretch="Uniform" Grid.Column="1" />
-            <Image Name="OtherBonus3Image" Stretch="Uniform" Grid.Column="2" />
+            <Image Name="OtherBonus1Image" Stretch="None" />
+            <Image Name="OtherBonus2Image" Stretch="None" Grid.Column="1" />
+            <Image Name="OtherBonus3Image" Stretch="None" Grid.Column="2" />
         </Grid>
-        </Grid>
+    </Grid>
 </Window>

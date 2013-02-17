@@ -158,6 +158,21 @@
   <ItemGroup>
     <None Include="Resources\background_brute.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agility.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\level.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\life.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\speed.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\strength.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

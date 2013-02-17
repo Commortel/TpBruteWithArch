@@ -60,6 +60,13 @@ namespace Client.Properties {
             }
         }
         
+        public static System.Drawing.Bitmap agility {
+            get {
+                object obj = ResourceManager.GetObject("agility", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         public static System.Drawing.Bitmap arbitre {
             get {
                 object obj = ResourceManager.GetObject("arbitre", resourceCulture);
@@ -77,6 +84,34 @@ namespace Client.Properties {
         public static System.Drawing.Bitmap button {
             get {
                 object obj = ResourceManager.GetObject("button", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Bitmap level {
+            get {
+                object obj = ResourceManager.GetObject("level", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Bitmap life {
+            get {
+                object obj = ResourceManager.GetObject("life", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Bitmap speed {
+            get {
+                object obj = ResourceManager.GetObject("speed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Bitmap strength {
+            get {
+                object obj = ResourceManager.GetObject("strength", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
