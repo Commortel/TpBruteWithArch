@@ -68,39 +68,11 @@
         </Grid>
 
         <!--********************* MyBrute **************-->
-        <local:BruteWindow x:Name="BruteTest" Grid.Row="1"/>
-        <Grid Name="MeBonusImage" Grid.Row="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="55" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-            </Grid.ColumnDefinitions>
-            <Image Name="MeBonus1Image" Stretch="None" />
-            <Image Name="MeBonus2Image" Stretch="None" Grid.Column="1" />
-            <Image Name="MeBonus3Image" Stretch="None" Grid.Column="2" />
-        </Grid>
+        <local:BruteWindow x:Name="Brute" Grid.Row="1"/>
+        <local:BruteBonusWindow x:Name="BruteBonus" Grid.Row="2" />
 
         <!--********************* OtherBrute **************-->
-        <local:BruteWindow x:Name="BruteTestOther" Grid.Row="1" Grid.Column="1"/>
-        <Grid Name="OtherBonusImage" Grid.Row="2" Grid.Column="1" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="55" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-            </Grid.ColumnDefinitions>
-            <Image Name="OtherBonus1Image" Stretch="None" />
-            <Image Name="OtherBonus2Image" Stretch="None" Grid.Column="1" />
-            <Image Name="OtherBonus3Image" Stretch="None" Grid.Column="2" />
-        </Grid>
+        <local:BruteWindow x:Name="BruteOther" Grid.Row="1" Grid.Column="1"/>
+        <local:BruteBonusWindow x:Name="BruteOtherBonus" Grid.Row="2" Grid.Column="1" />
     </Grid>
 </Window>

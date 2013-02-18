@@ -77,10 +77,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BruteBonusWindow.xaml.cs">
+      <DependentUpon>BruteBonusWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BruteWindow.xaml.cs">
       <DependentUpon>BruteWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="SocketClient.cs" />
+    <Page Include="BruteBonusWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="BruteWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

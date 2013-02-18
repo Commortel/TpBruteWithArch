@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="Client.BruteBonusWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="170" d:DesignWidth="400"
+             x:Name="BruteBonusWindowControl">
+    <Grid x:Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="85" />
+            <RowDefinition Height="85" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80" />
+            <ColumnDefinition Width="80" />
+            <ColumnDefinition Width="80" />
+            <ColumnDefinition Width="80" />
+            <ColumnDefinition Width="80" />
+        </Grid.ColumnDefinitions>
+        <Image Name="Bonus1Image" Stretch="None" />
+        <Image Name="Bonus2Image" Stretch="None" Grid.Column="1" />
+        <Image Name="Bonus3Image" Stretch="None" Grid.Column="2" />
+        <Image Name="Bonus4Image" Stretch="None" Grid.Column="3"/>
+        <Image Name="Bonus5Image" Stretch="None" Grid.Column="4" />
+        <Image Name="Bonus6Image" Stretch="None" Grid.Row="1" />
+        <Image Name="Bonus7Image" Stretch="None" Grid.Row="1" Grid.Column="1" />
+        <Image Name="Bonus8Image" Stretch="None" Grid.Row="1" Grid.Column="2" />
+        <Image Name="Bonus9Image" Stretch="None" Grid.Row="1" Grid.Column="3" />
+        <Image Name="Bonus10Image" Stretch="None" Grid.Row="1" Grid.Column="4"/>
+    </Grid>
+</UserControl>

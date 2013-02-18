@@ -45,10 +45,10 @@ namespace Client
         private void Initialize()
         {
             MainGrid.Background = new SolidColorBrush(Color.FromRgb(250, 248, 195));
-            BruteTest.Visibility = System.Windows.Visibility.Hidden;
-            BruteTestOther.Visibility = System.Windows.Visibility.Hidden;
-            MeBonusImage.Visibility = System.Windows.Visibility.Hidden;
-            OtherBonusImage.Visibility = System.Windows.Visibility.Hidden;
+            Brute.Visibility = System.Windows.Visibility.Hidden;
+            BruteOther.Visibility = System.Windows.Visibility.Hidden;
+            BruteBonus.Visibility = System.Windows.Visibility.Hidden;
+            BruteOtherBonus.Visibility = System.Windows.Visibility.Hidden;
             Menu.Visibility = System.Windows.Visibility.Hidden;
 
             Login.Visibility = System.Windows.Visibility.Visible;
@@ -56,8 +56,6 @@ namespace Client
             Submit.Background = new SolidColorBrush(Color.FromRgb(250, 248, 195));
             NewAccountImage.Source = this.CreateImage("Resources/button.gif");
             NewAccount.Background = new SolidColorBrush(Color.FromRgb(250, 248, 195));
-            MeBonusImage.Background = this.BitmapToBrush(this.CreateImage("Resources/tableau_bois.png"));
-            OtherBonusImage.Background = this.BitmapToBrush(this.CreateImage("Resources/tableau_bois.png"));
             GetOpponent.Background = this.BitmapToBrush(this.CreateImage("Resources/button.gif"));
             FightWin.Background = this.BitmapToBrush(this.CreateImage("Resources/button.gif"));
             FightLose.Background = this.BitmapToBrush(this.CreateImage("Resources/button.gif"));
@@ -92,29 +90,15 @@ namespace Client
                 Login.Visibility = System.Windows.Visibility.Hidden;
 
                 Menu.Visibility = System.Windows.Visibility.Visible;
-                BruteTest.Visibility = System.Windows.Visibility.Visible;
-                MeBonusImage.Visibility = System.Windows.Visibility.Visible;
+                Brute.Visibility = System.Windows.Visibility.Visible;
+                BruteBonus.Visibility = System.Windows.Visibility.Visible;
                 this.client.GetBrute(BoxLogin.Text);
 
-                BruteTest.BruteImageControl = "MyBruteImg.jpg";
-                BruteTest.NameTitleControl = this.client.MyBrute.Name;
-                BruteTest.StatBruteControl = this.StatBruteMaker(this.client.MyBrute);
+                Brute.BruteImageControl = "MyBruteImg.jpg";
+                Brute.NameTitleControl = this.client.MyBrute.Name;
+                Brute.StatBruteControl = this.StatBruteMaker(this.client.MyBrute);
 
-                for (int i = 0; i < this.client.MyBrute.BonusList.Count; i++)
-                {
-                    switch(i)
-                    {
-                        case 0:
-                            MeBonus1Image.Source = this.CreateImage("BruteBonus" + i + ".png");
-                            break;
-                        case 1:
-                            MeBonus2Image.Source = this.CreateImage("BruteBonus" + i + ".png");
-                            break;
-                        case 2:
-                            MeBonus3Image.Source = this.CreateImage("BruteBonus" + i + ".png");
-                            break;
-                    }
-                }           
+                BruteBonus.SetBonusImage = this.BonusListMaker(this.client.MyBrute,"BruteBonus");       
             }
             else
             {
@@ -126,28 +110,14 @@ namespace Client
         {
             GetOpponent.IsEnabled = false;
             this.client.GetOpponent();
-            BruteTestOther.Visibility = System.Windows.Visibility.Visible;
-            OtherBonusImage.Visibility = System.Windows.Visibility.Visible;
+            BruteOther.Visibility = System.Windows.Visibility.Visible;
+            BruteOtherBonus.Visibility = System.Windows.Visibility.Visible;
 
-            BruteTestOther.BruteImageControl = "OtherBruteImg.jpg";
-            BruteTestOther.NameTitleControl = this.client.OtherBrute.Name;
-            BruteTestOther.StatBruteControl = this.StatBruteMaker(this.client.OtherBrute);
+            BruteOther.BruteImageControl = "OtherBruteImg.jpg";
+            BruteOther.NameTitleControl = this.client.OtherBrute.Name;
+            BruteOther.StatBruteControl = this.StatBruteMaker(this.client.OtherBrute);
+            BruteOtherBonus.SetBonusImage = this.BonusListMaker(this.client.OtherBrute, "OtherBruteBonus");
 
-            for (int i = 0; i < this.client.OtherBrute.BonusList.Count; i++)
-            {
-                switch (i)
-                {
-                    case 0:
-                        OtherBonus1Image.Source = this.CreateImage("OtherBruteBonus" + i + ".png");
-                        break;
-                    case 1:
-                        OtherBonus2Image.Source = this.CreateImage("OtherBruteBonus" + i + ".png");
-                        break;
-                    case 2:
-                        OtherBonus3Image.Source = this.CreateImage("OtherBruteBonus" + i + ".png");
-                        break;
-                }
-            }
             GetOpponent.IsEnabled = true;
         }
 
@@ -161,7 +131,7 @@ namespace Client
             this.client.UpdateBrute(this.client.MyBrute.Name, true);
             this.client.GetBrute(this.client.MyBrute.Name);
 
-            BruteTest.StatBruteControl = this.StatBruteMaker(this.client.MyBrute);
+            Brute.StatBruteControl = this.StatBruteMaker(this.client.MyBrute);
         }
 
         private void FightLose_Click(object sender, RoutedEventArgs e)
@@ -169,7 +139,7 @@ namespace Client
             this.client.UpdateBrute(this.client.OtherBrute.Name, true);
             this.client.GetBrute(this.client.OtherBrute.Name);
 
-            BruteTestOther.StatBruteControl = this.StatBruteMaker(this.client.OtherBrute);
+            BruteOther.StatBruteControl = this.StatBruteMaker(this.client.OtherBrute);
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
@@ -211,6 +181,16 @@ namespace Client
             tmp.Add(Convert.ToString(brute.Strength));
             tmp.Add(Convert.ToString(brute.Agility));
             tmp.Add(Convert.ToString(brute.Speed));
+            return tmp;
+        }
+
+        private List<string> BonusListMaker(Brute brute, String name)
+        {
+            List<string> tmp = new List<string>();
+            for (int i = 0; i < 3; i++)
+            {
+                tmp.Add(name + i + ".png");
+            }
             return tmp;
         }
 
