@@ -115,10 +115,15 @@ namespace ServeurBrute
          {
          }
 
-         public void GetOpponent()
+         public void GetOpponent(String name)
          {
              Console.WriteLine("GetOpponent");
-             Brute tmp = SocketServer.listBrute.ElementAt(new Random().Next(0,SocketServer.listBrute.Count)).Value;
+             Brute tmp = new Brute(); bool OtherBrute = true;
+             while (OtherBrute)
+             {
+                tmp = SocketServer.listBrute.ElementAt(new Random().Next(0,SocketServer.listBrute.Count)).Value;
+                OtherBrute = tmp.Name.Equals(name);
+             }
              this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_DOWNLOAD_BRUTE);
              this.GetWriter.CreateString(tmp.getParam());
              this.GetWriter.CreateDiscriminant(ProtocoleImplementation.ANSWER_DOWNLOAD_BRUTE_IMG);

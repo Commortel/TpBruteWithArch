@@ -150,7 +150,7 @@ namespace Client
 
         private void NewAccount_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("Fonction non fonctionnelle : Meyer/Meyer pour se connecter");
         }
 
         private BitmapImage CreateImage(string path)
@@ -187,7 +187,7 @@ namespace Client
         private List<string> BonusListMaker(Brute brute, String name)
         {
             List<string> tmp = new List<string>();
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < brute.BonusList.Count; i++)
             {
                 tmp.Add(name + i + ".png");
             }

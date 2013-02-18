@@ -63,7 +63,7 @@ namespace ServeurBrute
                         (new Query(this.GetWriter())).ListOpponent();
                         break;
                     case ProtocoleImplementation.QUERY_GET_OPPONENT:
-                        (new Query(this.GetWriter())).GetOpponent();
+                        (new Query(this.GetWriter())).GetOpponent(rd.ReadString());
                         break;
                     case ProtocoleImplementation.QUERY_GET_LIST_BRUTE:
                         (new Query(this.GetWriter())).ListeBrute();

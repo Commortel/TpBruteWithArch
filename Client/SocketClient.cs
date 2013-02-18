@@ -135,6 +135,7 @@ namespace Client
         public bool GetOpponent()
         {
             this.GetWriter().CreateDiscriminant(ProtocoleImplementation.QUERY_GET_OPPONENT);
+            this.GetWriter().CreateString(MyBrute.Name);
             this.GetWriter().Send();
             if (this.GetReader().ReadDiscriminant() == ProtocoleImplementation.ANSWER_KO)
                 return false;

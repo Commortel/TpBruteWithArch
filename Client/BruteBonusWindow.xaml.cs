@@ -39,7 +39,7 @@ namespace Client
             }
             set 
             {
-                for(int i=0; i < 3; i++)
+                for(int i=0; i < value.Count; i++)
                 {
                     if(MainGrid.Children[i] is Image)
                         ((Image)MainGrid.Children[i]).Source = this.CreateImage(value[i]);
